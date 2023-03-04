@@ -10,7 +10,7 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path="/join" component={<Join />} />
+          <Route path="/join" element={<Join />} />
         </Routes>        
       </div>
     </BrowserRouter> 
