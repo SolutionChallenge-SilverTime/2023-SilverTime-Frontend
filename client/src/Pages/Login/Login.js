@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from "react";
-import * as style from "./style";
+import { useNavigate } from "react-router";
+import * as style from "./styles";
 import Input from "../../Components/Input/Input";
 import OrangeFullButton from "../../Components/Button/OrangeFullButton";
 import OrangeStrokeButton from "../../Components/Button/OrangeStrokeButton";
 import FullButton from "../../Components/Button/FullButton";
-import YellowFullButton from "../../Components/Button/YellowFullButton";
-import StrokeButton from "../../Components/Button/StrokeButton";
 import NewModal from "../../Components/Modal/Modal";
 import { ModalProvider } from "styled-react-modal";
 
 const User = {
-    nickname: 'test@example.com',
-    pw: 'test2323@@@'
+    usertype: "senior",
+    nickname: "test@example.com",
+    pw: "test2323@@@",
 }
 
 export default function Login() {
+    const navigate = useNavigate();
+
     const [usertype, setUsertype] = useState("");
     const [nickname, setNickname] = useState("");
     const [pw, setPw] = useState("");
@@ -25,21 +27,24 @@ export default function Login() {
     const [notAllow, setNotAllow] = useState(true);
 
     useEffect(() => {
-        if(nicknameValid && pwValid) {
+        if(usertypeValid && nicknameValid && pwValid) {
             setNotAllow(false);
             return;
         }
         setNotAllow(true);
-    }, [nicknameValid, pwValid]);
+    }, [usertypeValid, nicknameValid, pwValid]);
 
     const onClickSenior = () => {
         setUsertype("senior");
+        setUsertypeValid(true);
     }
     const onClickProtector = () => {
         setUsertype("protector");
+        setUsertypeValid(true);
     }
     const onClickTeacher = () => {
         setUsertype("teacher");
+        setUsertypeValid(true);
     }
     const handleNickname = (e) => {
         setNickname(e.target.value);
@@ -50,6 +55,7 @@ export default function Login() {
             setNicknameValid(false);
         }
     };
+
     const handlePw = (e) => {
         setPw(e.target.value);
         const regex = /^[A-Za-z0-9]{8,20}$/;
@@ -59,9 +65,11 @@ export default function Login() {
             setPwValid(false);
         }
     };
+
     const onClickLoginButton = () => {
-        if(nickname === User.nickname && pw === User.pw) {
+        if(usertype === User.usertype && nickname === User.nickname && pw === User.pw) {
             alert('로그인에 성공했습니다.');
+            navigate("/main")
         }   else {
             alert("등록되지 않은 회원입니다.");
         }
@@ -93,8 +101,8 @@ export default function Login() {
                 />
                 <style.ButtonBlock>
                     <div>
-                        <FullButton className="bottomButton" onClick={onClickLoginButton} btnName={"로그인"}></FullButton>
-                        <NewModal />
+                        <FullButton onClick={onClickLoginButton} btnName={"로그인"}></FullButton>
+                        <NewModal/>
                     </div>
                 </style.ButtonBlock>
             </style.Wrap>
