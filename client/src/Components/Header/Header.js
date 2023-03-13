@@ -10,13 +10,13 @@ export default function Header(props) {
         <style.Title>
             {props.title === "실버타임" 
             ? (<img 
-                    src={process.env.PUBLIC_URL + "/images/Header/HeartIcon.svg"}
+                    src={process.env.PUBLIC_URL + "/Images/Header/HeartIcon.svg"}
                     width={"30px"}
                     height={"30px"}
                 />
             )
             : (<img
-                    src={process.env.PUBLIC_URL + "/images/Header/BackIcon.svg"}
+                    src={process.env.PUBLIC_URL + "/Images/Header/BackIcon.svg"}
                     onClick={() => {props.title === "회원가입" ? navigate("../login") : navigate(-1);}}
                     width={"30px"}
                     height={"30px"}
@@ -25,7 +25,7 @@ export default function Header(props) {
             <span>{props.title}</span>
             {props.title === "내 정보"
             ? (<img
-                    src={process.env.PUBLIC_URL + "/images/Header/SettingIcon.svg"}
+                    src={process.env.PUBLIC_URL + "/Images/Header/SettingIcon.svg"}
                     onClick={() => {navigate("../setting");}}
                     width={"35px"}
                     height={"35px"}
