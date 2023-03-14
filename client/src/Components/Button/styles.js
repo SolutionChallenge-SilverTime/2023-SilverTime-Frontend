@@ -7,22 +7,45 @@ export const CloseButton = styled.div`
     font-weight: 700;
     font-size: 26px;
     background-color: transparent;
-`
+`;
+
+export const FloatingButton = styled.div`
+    position: fixed;
+    width: 100%;
+    max-width: 480px;
+    top: 800px;
+    left: 960px;
+    @media only screen and (max-width: 480px) {
+        top: 750px;
+        left: 360px;
+    }
+`;
+
 export const FullButton = styled.div`
-    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px 0;
     background: #FF7F00;
     border-radius: 10px;
-    padding: 10px;
-    color: #ffffff;
+    padding: 20px;
+    color: ${(props) => props.color || "black"};
     font-weight: 700;
-    font-size: 20px;
+    font-size: ${(props) => props.fontSize || "20px"};
     text-align: center;
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
     cursor: pointer;
+    > img {
+        width: 50%;
+        height: 50%;
+        margin-right: 20px;
+    }
 `;
 
 export const OrangeFullButton = styled.div`
-    width: 100%;
+    width: 120px;
+    height: ${(props) => props.height};
+    margin: ${(props) => props.margin};
     background: #FF9900;
     border-radius: 10px;
     padding: 10px;
@@ -35,6 +58,8 @@ export const OrangeFullButton = styled.div`
 `;
 
 export const YellowFullButton = styled.div`
+    width: 100%;
+    height: ${(props) => props.height};
     margin-top: 15px;
     background: #FFB800;
     border-radius: 10px;
@@ -48,6 +73,7 @@ export const YellowFullButton = styled.div`
 `;
 
 export const StrokeButton = styled.div`
+    height: ${(props) => props.height};
     background: #ffffff;
     border: 2px solid #FF7F00;
     border-radius: 10px;
@@ -61,7 +87,8 @@ export const StrokeButton = styled.div`
 `;
 
 export const OrangeStrokeButton = styled.div`
-    width: 100%;
+    width: 120px;
+    height: ${(props) => props.height};
     background: #ffffff;
     border: 2px solid #FF9900;
     border-radius: 10px;
