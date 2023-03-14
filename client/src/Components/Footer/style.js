@@ -4,7 +4,7 @@ export const Wrap = styled.div`
     position: sticky;
     width: 100%;
     max-width: 480px;
-    top: 0;
+    bottom: 0;
     background-color: #ffffff;
 `;
 
