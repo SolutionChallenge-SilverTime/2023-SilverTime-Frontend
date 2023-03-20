@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router";
+import axios from "axios";
 import * as style from "./styles";
 import Input from "../../Components/Input/Input";
 import OrangeFullButton from "../../Components/Button/OrangeFullButton";
@@ -21,58 +22,50 @@ export default function Login() {
     const [nickname, setNickname] = useState("");
     const [pw, setPw] = useState("");
 
-    const [usertypeValid, setUsertypeValid] = useState(false);
-    const [nicknameValid, setNicknameValid] = useState(false);
-    const [pwValid, setPwValid] = useState(false);
-    const [notAllow, setNotAllow] = useState(true);
-
-    useEffect(() => {
-        if(usertypeValid && nicknameValid && pwValid) {
-            setNotAllow(false);
-            return;
-        }
-        setNotAllow(true);
-    }, [usertypeValid, nicknameValid, pwValid]);
-
     const onClickSenior = () => {
         setUsertype("senior");
-        setUsertypeValid(true);
     }
     const onClickProtector = () => {
         setUsertype("protector");
-        setUsertypeValid(true);
     }
     const onClickTeacher = () => {
         setUsertype("teacher");
-        setUsertypeValid(true);
     }
     const handleNickname = (e) => {
         setNickname(e.target.value);
-        const regex = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|0-9]/;
-        if (regex.test(e.target.value)) {
-            setNicknameValid(true);
-        } else {
-            setNicknameValid(false);
-        }
     };
 
     const handlePw = (e) => {
         setPw(e.target.value);
-        const regex = /^[A-Za-z0-9]{8,20}$/;
-        if (regex.test(e.target.value)) {
-            setPwValid(true);
-        } else {
-            setPwValid(false);
-        }
     };
 
     const onClickLoginButton = () => {
-        if(usertype === User.usertype && nickname === User.nickname && pw === User.pw) {
-            alert('로그인에 성공했습니다.');
-            navigate("/main")
-        }   else {
-            alert("등록되지 않은 회원입니다.");
-        }
+        axios.post("npm startgin", 
+                null, 
+                { params: {nickname: nickname, pw: pw} }
+            ).then(function(resp) {
+                console.log(resp.data);
+                if (resp.data !== null && resp.data != "") {
+                    console.log("로그인 성공");
+                    navigate("/main", {
+                        state: {
+                            usertype: usertype,
+                        }
+                    })
+                } else {
+                    alert("로그인 실패", "아이디나 비밀번호를 확인하세요.");
+                    setNickname("");
+                    setPw("");
+                }
+            }).catch(function(err) {
+                console.log(`Error Message: ${err}`);
+            })
+        // if(usertype === User.usertype && nickname === User.nickname && pw === User.pw) {
+        //     alert('로그인에 성공했습니다.');
+            
+        // }   else {
+        //     alert("등록되지 않은 회원입니다.");
+        // }
     };
 
     return (
@@ -92,12 +85,14 @@ export default function Login() {
                     onChange={handleNickname}
                     title={"닉네임"} 
                     value={nickname}
+                    placeholder={"닉네임을 입력해주세요."}
                 />
                 <Input
                     name={"password"}
                     onChange={handlePw}
                     title={"비밀번호"}
                     value={pw}
+                    placeholder={"비밀번호를 입력해주세요."}
                 />
                 <style.ButtonBlock>
                     <div>
