@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import * as style from "./styles";
 import FullButton from "../../Components/Button/FullButton";
@@ -11,6 +11,19 @@ export default function Main() {
   const title = "실버타임";
   const navigate = useNavigate();
   const location = useLocation();
+  const [isLogin, setIsLogin] = useState(false);
+
+  useEffect(() => {
+    if (sessionStorage.getItem("token") === null) {
+      // sessionStorage 에 name 라는 key 값으로 저장된 값이 없다면
+      console.log("isLogin ?? :: ", isLogin);
+    } else {
+      // sessionStorage 에 name 라는 key 값으로 저장된 값이 있다면
+      // 로그인 상태 변경
+      setIsLogin(true);
+      console.log("isLogin ?? :: ", isLogin);
+    }
+  });
 
   return (
     <div>
