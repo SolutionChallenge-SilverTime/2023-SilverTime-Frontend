@@ -15,6 +15,7 @@ export default function Main() {
 
   const [isNick, setIsNick] = useState(null);
   const [isUserId, setIsUserId] = useState(null);
+  const [isIdentity, setIsIdentity] = useState(null);
 
   useEffect(() => {
     if (sessionStorage.getItem("nickName") === null) {
@@ -25,8 +26,10 @@ export default function Main() {
       // 로그인 상태 변경
       setIsNick(sessionStorage.getItem("nickName"));
       setIsUserId(sessionStorage.getItem("userId"));
+      setIsIdentity(sessionStorage.getItem("identity"));
       console.log("nickName :: ", isNick);
       console.log("userId ::", isUserId);
+      console.log("identity :: ", isIdentity);
     }
   });
 
