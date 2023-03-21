@@ -52,6 +52,8 @@ export default function Login() {
         console.log(resp.data);
         if (resp.data !== null && resp.data != "") {
           console.log("로그인 성공");
+          sessionStorage.setItem("nickName", Object.values(resp.data)[0]);
+          sessionStorage.setItem("userId", Object.values(resp.data)[2]);
           navigate("/main", {
             state: {
               usertype: usertype,
