@@ -22,7 +22,7 @@ export default function Dropdown(props) {
         if (selectedValue) {
             return selectedValue.label;
         }
-        return props.placeHolder;
+        return props.placeholder;
     };
 
     const onItemClick = (option) => {
@@ -33,13 +33,15 @@ export default function Dropdown(props) {
         <div>
             <style.DropdownTitle>{props.title}</style.DropdownTitle>
             <style.DropdownContainer>
-                <style.DropdownInput onClick={handleInputClick}>
+                <style.DropdownInput 
+                    onClick={handleInputClick} 
+                    backgroundColor={props.backgroundColor}
+                >
                     <div>{getDisplay()}</div>
                     <div>
                         <img src={process.env.PUBLIC_URL + "/Images/Dropdown/DropdownIcon.svg"} />
                     </div>
                 </style.DropdownInput>
-                
             </style.DropdownContainer>    
             {showMenu && (
                     <style.DropdownMenu>
