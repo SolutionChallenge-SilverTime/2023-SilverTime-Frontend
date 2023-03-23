@@ -13,42 +13,62 @@ export default function ClassCategory() {
   const title="수업";
   const categoryOptions = [
     {
-      key: 1,
+      id: 1,
       label: "전체",
     },
     {
-      key: 2,
+      id: 2,
       label: "교육",
     },
     {
-      key: 3,
+      id: 3,
       label: "취미",
     },
     {
-      key: 4,
+      id: 4,
       label: "건강",
     },
     {
-      key: 5,
+      id: 5,
       label: "친목",
     },
   ]
 
   const orderOptions = [
     {
-      key: 1,
+      id: 1,
       label: "인기순",
     },
     {
-      key: 2,
+      id: 2,
       label: "최신순",
     },
     {
-      key: 3,
+      id: 3,
       label: "추천순",
     },
   ]
 
+  const obj = {
+    data: [
+      { src: process.env.PUBLIC_URL + "/Images/ClassCard/ClassImg.svg", 
+        className: "스마트폰 수업", 
+        classDays: "매주 목", 
+        classTime: "11:00 ~ 13:00", 
+        classExplain: "혼자 사용하기 힘든 스마트폰, 이 수업을 통해 사용법을 익혀보세요!", 
+        location: "정릉 2동 주민센터", 
+        starCount: 4, 
+        registerCount: "5명 / 10명" },
+      { src: process.env.PUBLIC_URL + "/Images/ClassCard/ClassImg.svg", 
+        className: "십자수 수업", 
+        classDays: "매주 금", 
+        classTime: "17:00 ~ 19:00", 
+        classExplain: "십자수 수업으로 집중력을 길러보세요!", 
+        location: "수유 1동 주민센터", 
+        starCount: 6, 
+        registerCount: "7명 / 15명" },
+    ]
+  }
 
   return (
     <div>
@@ -56,19 +76,32 @@ export default function ClassCategory() {
       <style.Wrap>
         <SearchBox />
         <style.TopBlock>
-          <Dropdown 
+          <Dropdown
             options={categoryOptions}
             placeholder={location.state.category}
             backgroundColor={"#FF7F00"}
-        />
-        <Dropdown 
-            options={orderOptions}
-            placeholder={"인기순"}
-            backgroundColor={"#D3D3D3"}
-        />
+          />
+          <Dropdown
+              options={orderOptions}
+              placeholder={"인기순"}
+              backgroundColor={"#D3D3D3"}
+          />
         </style.TopBlock>
         <YellowFullButton btnName={"정릉 3동 주민센터"} />
-        <ClassCard />
+        {obj.data.map((item) => {
+            return (
+              <ClassCard 
+                src={item.src}
+                className={item.className}
+                classDays={item.classDays}
+                classTime={item.classTime}
+                classExplain={item.classExplain}
+                location={item.location}
+                starCount={item.starCount}
+                registerCount={item.registerCount}
+              />
+            )
+          })}
       </style.Wrap>
       <Footer title={title} />
     </div>

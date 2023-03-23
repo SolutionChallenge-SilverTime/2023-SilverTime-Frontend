@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Wrap = styled.div`
+    margin-top: 30px;
     margin-bottom: 50px;
     padding: 30px;
     display: flex;
@@ -25,7 +26,6 @@ export const TopBlock = styled.div`
     max-width: 370px;
     > span {
         &:first-child {
-            // margin-right: 70px;
             font-weight: 700;
             font-size: 32px;
         }
