@@ -10,7 +10,7 @@ export const Wrap = styled.div`
 
 export const Menu = styled.div`
     max-width: 480px;
-    height: 50px;
+    height: 60px;
     display: grid;
     align-items: center;
     grid-template-columns: repeat(5, 1fr);

@@ -1,37 +1,69 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import FullButton from "../Button/FullButton";
 import * as style from "./styles";
 
 export default function Header(props) {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    return (
+  return (
     <style.Wrap>
-        <style.Title>
-            {props.title === "실버타임" 
-            ? (<img 
-                    src={process.env.PUBLIC_URL + "/Images/Header/HeartIcon.svg"}
-                    width={"30px"}
-                    height={"30px"}
-                />
-            )
-            : (<img
-                    src={process.env.PUBLIC_URL + "/Images/Header/BackIcon.svg"}
-                    onClick={() => {props.title === "회원가입" ? navigate("../login") : navigate(-1);}}
-                    width={"30px"}
-                    height={"30px"}
-                />
-            )}
-            <span>{props.title}</span>
-            {props.title === "내 정보"
-            ? (<img
-                    src={process.env.PUBLIC_URL + "/Images/Header/SettingIcon.svg"}
-                    onClick={() => {navigate("../setting");}}
-                    width={"35px"}
-                    height={"35px"}
-                />
-            ) : <span></span>}
-        </style.Title>
+      <style.Title>
+        {props.title === "실버타임" ? (
+          <img
+            src={process.env.PUBLIC_URL + "/Images/Logo/Logo.svg"}
+            width={"50px"}
+            height={"50px"}
+          />
+        ) : (
+          <img
+            src={process.env.PUBLIC_URL + "/Images/Header/BackIcon.svg"}
+            onClick={() => {
+              props.title === "회원가입" ? navigate("../login") : navigate(-1);
+            }}
+            width={"30px"}
+            height={"30px"}
+          />
+        )}
+        <span>{props.title}</span>
+        {props.title === "특이사항 작성" ? (
+          <style.FlexBox>
+            <img
+              src={process.env.PUBLIC_URL + "/Images/Header/SaveIcon.svg"}
+              onClick={props.onClick}
+              width={"30px"}
+              height={"30px"}
+            />
+            <FullButton
+              btnName={"전송"}
+              onClick={() => {
+                alert("특이사항을 전송하시겠습니까?");
+                navigate("../noteList");
+              }}
+              width={"30px"}
+              height={"10px"}
+            />
+          </style.FlexBox>
+        ) : props.title === "특이사항 확인" ? (
+          <img
+            src={process.env.PUBLIC_URL + "/Images/Header/TrashIcon.svg"}
+            onClick={props.onClick}
+            width={"40px"}
+            height={"40px"}
+          />
+        ) : props.title === "내 정보" ? (
+          <img
+            src={process.env.PUBLIC_URL + "/Images/Header/SettingIcon.svg"}
+            onClick={() => {
+              navigate("../setting");
+            }}
+            width={"40px"}
+            height={"40px"}
+          />
+        ) : (
+          <span></span>
+        )}
+      </style.Title>
     </style.Wrap>
   );
 }
