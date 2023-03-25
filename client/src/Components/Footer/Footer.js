@@ -19,13 +19,13 @@ export default function Footer(props) {
                     }
                 </style.BtnLink>
                 <style.BtnLink>
-                    {props.title !== "검색"
+                    {props.title !== "AI 추천 수업"
                     ? (<img 
-                            src={process.env.PUBLIC_URL + "/Images/Footer/SearchIcon.svg"}
-                            onClick={() => {navigate("../search")}}
+                            src={process.env.PUBLIC_URL + "/Images/Footer/RecommendIcon.svg"}
+                            onClick={() => {navigate("../aiClass")}}
                         />
                     )
-                    : (<img src={process.env.PUBLIC_URL +"/Images/Footer/SearchSelectIcon.svg"} />)
+                    : (<img src={process.env.PUBLIC_URL +"/Images/Footer/RecommendSelectIcon.svg"} />)
                     }
                 </style.BtnLink>
                 <style.BtnLink>
