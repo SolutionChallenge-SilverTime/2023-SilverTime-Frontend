@@ -3,7 +3,7 @@ import * as style from "./styles";
 
 export default function NoteItem(props) {
   return (
-    <style.Wrap>
+    <style.Wrap onClick={props.onClick}>
       <img src={props.src} />
       <style.RightBlock>
         <style.TopBlock>

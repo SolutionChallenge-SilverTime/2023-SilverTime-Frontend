@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import * as style from "./styles";
 import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
@@ -8,6 +9,7 @@ import NoteItem from "../../Components/NoteItem/NoteItem";
 
 export default function NoteList() {
   const title = "특이사항 목록"
+  const navigate = useNavigate();
 
   const obj = {
     data: [
@@ -30,6 +32,10 @@ export default function NoteList() {
     ]
   }
 
+  const onClickItem = () => {
+    navigate("../noteDetail")
+  };
+
   return (
     <div>
       <Header title={title} />
@@ -46,6 +52,7 @@ export default function NoteList() {
             className={item.className}
             date={item.date}
             title={item.title}
+            onClick={onClickItem}
           />
         )
       })}
