@@ -7,12 +7,19 @@ export default function Input(props) {
       backgroundColor={props.backgroundColor}
       top={props.top}
     >
-      {props.title !== null ? <span>{props.title}</span> : null }
-      <style.InputBlock className="인풋"
+      <style.TitleBlock
+        titleWeight={props.titleWeight}
+        titleSize={props.titleSize}
+      >
+        {props.title !== null ? <span>{props.title}</span> : null }
+      </style.TitleBlock>
+      <style.InputBlock
         stroke={props.stroke}
         backgroundColor={props.backgroundColor}
         fontWeight={props.fontWeight}
         fontSize={props.fontSize}
+        height={props.height}
+        border={props.border}
       >
         {props.src !== null ? <img src={props.src} /> : null }
         <input

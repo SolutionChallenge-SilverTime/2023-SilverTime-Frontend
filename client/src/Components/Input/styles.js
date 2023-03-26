@@ -13,15 +13,22 @@ export const Wrap = styled.div`
   }
 `;
 
+export const TitleBlock = styled.div`
+  font-weight: ${(props) => props.titleWeight || "400"};
+  font-size: ${(props) => props.titleSize || "20px"};
+`;
+
 export const InputBlock = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   > input {
+    margin-top: 5px;
     background-color: ${(props) => props.backgroundColor || "#FFFFFF"};
     width: 100%;
-    border: 2px solid ${(props) => props.stroke || "#E0E0E0"};
+    height: ${(props) => props.height};
+    border: 2px solid ${(props) => props.border || "#E0E0E0"};
     border-radius: 17px;
     padding: 12px 15px;
     font-weight: ${(props) => props.fontWeight || "400"};

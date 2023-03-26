@@ -1,7 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import FullButton from "../Button/FullButton";
 import * as style from "./styles";
+import FullButton from "../Button/FullButton";
+
 
 export default function Header(props) {
   const navigate = useNavigate();
