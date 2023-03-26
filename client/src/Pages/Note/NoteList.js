@@ -41,7 +41,9 @@ export default function NoteList() {
       <Header title={title} />
       <FloatingButton />
       <style.Wrap>
-        <SearchBox />
+        <SearchBox
+          color={"#FF7F00"}
+        />
       </style.Wrap>
       {obj.data.map((item) => {
         return (
