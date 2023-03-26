@@ -5,6 +5,7 @@ import Join from "./Pages/Join/Join";
 import Main from "./Pages/Main/Main";
 import NoteSend from "./Pages/Note/NoteSend";
 import NoteDetail from "./Pages/Note/NoteDetail";
+import NoteList from "./Pages/Note/NoteList";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/main" element={<Main />} />
           <Route path="/noteSend" element={<NoteSend />} />
           <Route path="/noteDetail" element={<NoteDetail />} />
+          <Route path="/noteList" element={<NoteList />} />
         </Routes>
       </div>
     </BrowserRouter>
