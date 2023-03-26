@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import * as style from "./styles";
 import FullButton from "../Button/FullButton";
 
-
 export default function Header(props) {
   const navigate = useNavigate();
 
@@ -37,10 +36,7 @@ export default function Header(props) {
             />
             <FullButton
               btnName={"전송"}
-              onClick={() => {
-                alert("특이사항을 전송하시겠습니까?");
-                navigate("../noteList");
-              }}
+              onClick={props.onClick}
               width={"30px"}
               height={"10px"}
             />

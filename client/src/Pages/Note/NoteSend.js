@@ -3,8 +3,11 @@ import * as style from "./styles";
 import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
 import Input from "../../Components/Input/Input";
+import axios from "axios";
+import { useNavigate } from "react-router";
 
 export default function NoteSend() {
+  const navigate = useNavigate();
   const title = "특이사항 작성";
 
   const [guardianName, setGuardianName] = useState("");
@@ -38,7 +41,7 @@ export default function NoteSend() {
       .post(
         "http://localhost:8080/significant/send",
         JSON.stringify({
-          guardianNickName: guardianName,
+          gurdianNickName: guardianName,
           tutorNickName: sessionStorage.getItem("nickName"),
           seniorName: seniorName,
           title: noteTitle,
