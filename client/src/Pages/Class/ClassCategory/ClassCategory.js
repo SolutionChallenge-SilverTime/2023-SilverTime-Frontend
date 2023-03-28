@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { useLocation } from "react-router-dom";
 import * as style from "./styles";
 import Header from "../../../Components/Header/Header";
@@ -10,8 +11,9 @@ import YellowFullButton from "../../../Components/Button/YellowFullButton";
 
 export default function ClassCategory() {
   const location = useLocation();
-  const title="수업";
-  
+  const title = "수업";
+  const userId = sessionStorage.getItem("userId");
+  const [adata, setData] = useState([]);
   const categoryOptions = [
     {
       id: 1,
@@ -33,7 +35,7 @@ export default function ClassCategory() {
       id: 5,
       label: "친목",
     },
-  ]
+  ];
 
   const orderOptions = [
     {
@@ -48,33 +50,32 @@ export default function ClassCategory() {
       id: 3,
       label: "추천순",
     },
-  ]
-
+  ];
+  useEffect(() => {
+    const url = `http://localhost:8080/user-lecture/all?category=hobby&sort=like&userId=${userId}`;
+    axios
+      .get(url)
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [userId]);
+  const objArray = adata.map((item) => ({
+    key: item.lectureId,
+    src: item.imageUrl,
+    className: item.title,
+    classDays: item.monday,
+    classTime: item.activityTime,
+    classExplain: item.lectureIntro,
+    location: item.location,
+    starCount: item.likeCount,
+    registerCount: `${item.presentPeople}/${item.maxPeople}`,
+  }));
   const obj = {
-    data: [
-      { 
-        id: 1,
-        src: process.env.PUBLIC_URL + "/Images/ClassCard/ClassImg.svg", 
-        className: "스마트폰 수업", 
-        classDays: "매주 목", 
-        classTime: "11:00 ~ 13:00", 
-        classExplain: "혼자 사용하기 힘든 스마트폰, 이 수업을 통해 사용법을 익혀보세요!", 
-        location: "정릉 2동 주민센터", 
-        starCount: 4, 
-        registerCount: "5명 / 10명" 
-      },
-      { 
-        id: 2,
-        src: process.env.PUBLIC_URL + "/Images/ClassCard/ClassImg.svg", 
-        className: "십자수 수업", 
-        classDays: "매주 금", 
-        classTime: "17:00 ~ 19:00", 
-        classExplain: "십자수 수업으로 집중력을 길러보세요!", 
-        location: "수유 1동 주민센터", 
-        starCount: 6, 
-        registerCount: "7명 / 15명" },
-    ]
-  }
+    data: objArray,
+  };
 
   return (
     <div>
@@ -88,30 +89,27 @@ export default function ClassCategory() {
             backgroundColor={"#FF7F00"}
           />
           <Dropdown
-              options={orderOptions}
-              placeholder={"인기순"}
-              backgroundColor={"#D3D3D3"}
+            options={orderOptions}
+            placeholder={"인기순"}
+            backgroundColor={"#D3D3D3"}
           />
         </style.TopBlock>
-        <YellowFullButton 
-          btnName={"정릉 3동 주민센터"} 
-          height={"30px"}
-        />
+        <YellowFullButton btnName={"정릉 3동 주민센터"} height={"30px"} />
         {obj.data.map((item) => {
-            return (
-              <ClassCard
-                key={item.id}
-                src={item.src}
-                className={item.className}
-                classDays={item.classDays}
-                classTime={item.classTime}
-                classExplain={item.classExplain}
-                location={item.location}
-                starCount={item.starCount}
-                registerCount={item.registerCount}
-              />
-            )
-          })}
+          return (
+            <ClassCard
+              key={item.id}
+              src={item.src}
+              className={item.className}
+              classDays={item.classDays}
+              classTime={item.classTime}
+              classExplain={item.classExplain}
+              location={item.location}
+              starCount={item.starCount}
+              registerCount={item.registerCount}
+            />
+          );
+        })}
       </style.Wrap>
       <Footer title={title} />
     </div>
