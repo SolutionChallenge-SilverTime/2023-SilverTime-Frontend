@@ -32,11 +32,8 @@ export default function Dropdown(props) {
     return (
         <div>
             <style.DropdownTitle>{props.title}</style.DropdownTitle>
-            <style.DropdownContainer>
-                <style.DropdownInput 
-                    onClick={handleInputClick} 
-                    backgroundColor={props.backgroundColor}
-                >
+            <style.DropdownContainer backgroundColor={props.backgroundColor}>
+                <style.DropdownInput onClick={handleInputClick}>
                     <div>{getDisplay()}</div>
                     <div>
                         <img src={process.env.PUBLIC_URL + "/Images/Dropdown/DropdownIcon.svg"} />

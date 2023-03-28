@@ -7,26 +7,23 @@ export const DropdownTitle = styled.div`
 `;
 
 export const DropdownContainer = styled.div`
+  width: 120px;
+  height: 50px;
   background-color: ${(props) => props.backgroundColor || "#FF7F00"};
   position: relative;
-  height: 22px;
   text-align: left;
-  border: 2px solid #e0e0e0;
   border-radius: 10px;
   padding: 12px 15px;
   font-weight: 400;
-  font-size: 18px;
-  :hover,
-  :focus-visible {
-    border: 2px solid #FF7F00;
-    outline: none;
-    transition: 0.5
+  font-size: 30px;
 `;
 
 export const DropdownInput = styled.div`
+  padding: 5px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  font-weight: 500;
 `;
 
 export const DropdownMenu = styled.div`
@@ -34,13 +31,14 @@ export const DropdownMenu = styled.div`
   border: 1px solid #e0e0e0;
   border-radius: 10px;
   overflow: auto;
-  max-height: 150px;
+  max-height: 300px;
   text-align: center;
 `;
 
 export const DropdownItem = styled.div`
   border-bottom: 1px solid #e0e0e0;
   padding: 5px;
+  font-size: 30px;
   cursor: pointer;
   &:hover {
     background-color: #ffb800;

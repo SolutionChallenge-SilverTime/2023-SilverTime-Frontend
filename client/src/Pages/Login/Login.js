@@ -42,8 +42,9 @@ export default function Login() {
   const onClickLoginButton = () => {
     axios
       .post(
-        "http://localhost/auth/signin",
-        JSON.stringify({ identity: 2, nickName: nickname, password: pw }),
+        "http://localhost:8080/auth/signin",
+        JSON.stringify({ identity: 0, nickName: nickname, password: pw }),
+
         {
           headers: { "Content-Type": `application/json` },
         }
