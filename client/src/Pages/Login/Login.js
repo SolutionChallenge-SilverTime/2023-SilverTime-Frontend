@@ -9,28 +9,27 @@ import FullButton from "../../Components/Button/FullButton";
 import NewModal from "../../Components/Modal/Modal";
 import { ModalProvider } from "styled-react-modal";
 
-const User = {
-  usertype: "senior",
-  nickname: "test@example.com",
-  pw: "test2323@@@",
-};
-
 export default function Login() {
   const navigate = useNavigate();
 
   const [usertype, setUsertype] = useState("");
   const [nickname, setNickname] = useState("");
   const [pw, setPw] = useState("");
+  const [identity, setIdentity] = useState(0);
 
   const onClickSenior = () => {
     setUsertype("senior");
+    setIdentity(0);
   };
   const onClickProtector = () => {
     setUsertype("protector");
+    setIdentity(1);
   };
   const onClickTeacher = () => {
     setUsertype("teacher");
+    setIdentity(2);
   };
+  
   const handleNickname = (e) => {
     setNickname(e.target.value);
   };
@@ -43,7 +42,7 @@ export default function Login() {
     axios
       .post(
         "http://localhost:8080/auth/signin",
-        JSON.stringify({ identity: 2, nickName: nickname, password: pw }),
+        JSON.stringify({ identity: identity, nickName: nickname, password: pw }),
         {
           headers: { "Content-Type": `application/json` },
         }
@@ -55,11 +54,10 @@ export default function Login() {
           sessionStorage.setItem("nickName", Object.values(resp.data)[0]);
           sessionStorage.setItem("userId", Object.values(resp.data)[2]);
           sessionStorage.setItem("identity", Object.values(resp.data)[3]);
-
           navigate("/main", {
             state: {
               usertype: usertype,
-            },
+            }
           });
         } else {
           alert("로그인 실패", "아이디나 비밀번호를 확인하세요.");
@@ -70,22 +68,16 @@ export default function Login() {
       .catch(function (err) {
         console.log(`Error Message: ${err}`);
       });
-    // if(usertype === User.usertype && nickname === User.nickname && pw === User.pw) {
-    //     alert('로그인에 성공했습니다.');
-
-    // }   else {
-    //     alert("등록되지 않은 회원입니다.");
-    // }
   };
 
   return (
     <ModalProvider>
       <style.Wrap>
         <style.LogoBlock>
-          <button
+          <img
             className="logoImg"
             alt="로고 이미지"
-            src=""
+            src={process.env.PUBLIC_URL +"/Images/Logo/Logo.svg"}
             style={{ width: "300px", height: "300px", borderRadius: "20px" }}
           />
         </style.LogoBlock>
