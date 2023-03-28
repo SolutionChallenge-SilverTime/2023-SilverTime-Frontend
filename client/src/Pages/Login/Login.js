@@ -44,6 +44,7 @@ export default function Login() {
       .post(
         "http://localhost:8080/auth/signin",
         JSON.stringify({ identity: 0, nickName: nickname, password: pw }),
+
         {
           headers: { "Content-Type": `application/json` },
         }
