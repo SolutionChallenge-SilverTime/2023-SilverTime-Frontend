@@ -6,6 +6,6 @@ export const Wrap = styled.div`
 
 export const TopBlock = styled.div`
   display: flex;
+  justify-content: space-between;
   margin-top: 20px;
-  
 `;

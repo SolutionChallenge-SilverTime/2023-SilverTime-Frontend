@@ -11,6 +11,7 @@ import YellowFullButton from "../../../Components/Button/YellowFullButton";
 export default function ClassCategory() {
   const location = useLocation();
   const title="수업";
+  
   const categoryOptions = [
     {
       id: 1,
@@ -51,15 +52,20 @@ export default function ClassCategory() {
 
   const obj = {
     data: [
-      { src: process.env.PUBLIC_URL + "/Images/ClassCard/ClassImg.svg", 
+      { 
+        id: 1,
+        src: process.env.PUBLIC_URL + "/Images/ClassCard/ClassImg.svg", 
         className: "스마트폰 수업", 
         classDays: "매주 목", 
         classTime: "11:00 ~ 13:00", 
         classExplain: "혼자 사용하기 힘든 스마트폰, 이 수업을 통해 사용법을 익혀보세요!", 
         location: "정릉 2동 주민센터", 
         starCount: 4, 
-        registerCount: "5명 / 10명" },
-      { src: process.env.PUBLIC_URL + "/Images/ClassCard/ClassImg.svg", 
+        registerCount: "5명 / 10명" 
+      },
+      { 
+        id: 2,
+        src: process.env.PUBLIC_URL + "/Images/ClassCard/ClassImg.svg", 
         className: "십자수 수업", 
         classDays: "매주 금", 
         classTime: "17:00 ~ 19:00", 
@@ -87,10 +93,14 @@ export default function ClassCategory() {
               backgroundColor={"#D3D3D3"}
           />
         </style.TopBlock>
-        <YellowFullButton btnName={"정릉 3동 주민센터"} />
+        <YellowFullButton 
+          btnName={"정릉 3동 주민센터"} 
+          height={"30px"}
+        />
         {obj.data.map((item) => {
             return (
-              <ClassCard 
+              <ClassCard
+                key={item.id}
                 src={item.src}
                 className={item.className}
                 classDays={item.classDays}
