@@ -7,6 +7,7 @@ function FullButton(props) {
       onClick={props.onClick}
       width={props.width}
       height={props.height}
+      fontSize={props.fontSize}
     >
       {props.src && <img src={props.src} />}
       {props.btnName}

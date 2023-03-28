@@ -27,7 +27,7 @@ export const FullButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 40px 0;
+  margin: 20px 0;
   background: #ff7f00;
   border-radius: 20px;
   padding: 20px;
@@ -38,8 +38,8 @@ export const FullButton = styled.div`
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   > img {
-    width: 50%;
-    height: 50%;
+    width: 25%;
+    height: 25%;
     margin-right: 20px;
   }
 `;
