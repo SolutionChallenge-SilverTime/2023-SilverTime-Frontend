@@ -33,8 +33,7 @@ export default function Class(props) {
         console.error(error);
       });
   }, [userId]);
-  console.log(adata.lectureIntroImagesUrl);
-
+  console.log(adata.curriculumImagesUrl);
 
   const handleTagClick = (tag) => {
     setCurrent(tag);
@@ -155,13 +154,13 @@ export default function Class(props) {
               src={adata.profileUrl}
               name={adata.tutorName}
               gender={adata.tutorGender}
-              age={"33세"}
+              age={adata.tutorBirth.substr(0, 10)}
               explain={adata.tutorIntro}
             />
           )}
           {current === "review" && (
             <Review
-              nickname={"만두"}
+              nickname={"익명"}
               review={
                 "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
               }

@@ -23,8 +23,9 @@ function App() {
           <Route path="/aiClass" element={<RecommendClass />} />
           <Route path="/chatbot" element={<Chatbot />} />
           <Route path="/noteSend" element={<NoteSend />} />
-          <Route path="/noteList" element={<NoteList />} />
           <Route path="/noteDetail" element={<NoteDetail />} />
+          <Route path="/noteList" element={<NoteList />} />
+          <Route path="/recommendClass" element={<RecommendClass />} />
         </Routes>
       </div>
     </BrowserRouter>

@@ -37,7 +37,7 @@ export default function Main() {
           btnName={"전체"}
           onClick={() =>
             navigate("../classCategory", {
-              state: { category: "전체" },
+              state: { category: "전체", value: "all" },
             })
           }
           src={process.env.PUBLIC_URL + "Images/Main/All.svg"}
@@ -47,7 +47,7 @@ export default function Main() {
           btnName={"교육"}
           onClick={() =>
             navigate("../classCategory", {
-              state: { category: "교육" },
+              state: { category: "교육", value: "education" },
             })
           }
           src={process.env.PUBLIC_URL + "Images/Main/EducationIcon.svg"}
@@ -57,7 +57,7 @@ export default function Main() {
           btnName={"취미"}
           onClick={() =>
             navigate("../classCategory", {
-              state: { category: "취미" },
+              state: { category: "취미", value: "hobby" },
             })
           }
           src={process.env.PUBLIC_URL + "Images/Main/InterestIcon.svg"}
@@ -67,7 +67,7 @@ export default function Main() {
           btnName={"건강"}
           onClick={() =>
             navigate("../classCategory", {
-              state: { category: "건강" },
+              state: { category: "건강", value: "health" },
             })
           }
           src={process.env.PUBLIC_URL + "Images/Main/HealthIcon.svg"}
@@ -77,7 +77,7 @@ export default function Main() {
           btnName={"친목"}
           onClick={() =>
             navigate("../classCategory", {
-              state: { category: "친목" },
+              state: { category: "친목", value: "social" },
             })
           }
           src={process.env.PUBLIC_URL + "Images/Main/AmityIcon.svg"}
