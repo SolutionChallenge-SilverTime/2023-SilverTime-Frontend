@@ -21,7 +21,7 @@ export const DetailBlock = styled.div`
     font-weight: 700;
     font-size: 20px;
     &:first-child {
-    color: #FF7F00;
+      color: #ff7f00;
     }
   }
 `;
@@ -43,8 +43,14 @@ export const IconBlock = styled.div`
 export const BottomBlock = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
+`;
+
+export const ContentBlock = styled.div`
+  border-top: 2px solid #e0e0e0;
 `;
 
 export const NavigateBlock = styled.div`
-  border-top: 2px solid #E0E0E0;
+  display: flex;
+  justify-content: space-between;
 `;

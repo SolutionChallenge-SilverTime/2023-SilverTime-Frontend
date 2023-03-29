@@ -4,6 +4,9 @@ import * as style from "./styles";
 export default function ClassIntro(props) {
   return (
     <style.Wrap>
+      <style.ClassBlock>{"시작일: " + props.startDate}</style.ClassBlock>
+      <style.ClassBlock>{"종료일: " + props.endDate}</style.ClassBlock>
+      <style.ClassBlock>{"수업 시간: " + props.classDate + " " +props.classTime}</style.ClassBlock>
       <style.ExplainBlock>{props.explain}</style.ExplainBlock>
       <style.ImageBlock>
         <style.ImageTopBlock>

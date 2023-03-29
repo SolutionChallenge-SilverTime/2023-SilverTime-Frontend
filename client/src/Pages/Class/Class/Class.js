@@ -11,49 +11,9 @@ import FloatingButton from "../../../Components/Button/FloatingButton";
 export default function Class(props) {
   const title = "수업";
   const [current, setCurrent] = useState("classIntro");
-  const [classIntroTextBold, setClassTextBold] = useState(700);
-  const [curriculumTextBold, setCurriculumTextBold] = useState(200);
-  const [teacherIntroTextBold, setTeacherIntroTextBold] = useState(200);
-  const [reviewTextBold, setReviewTextBold] = useState(200);
 
-  const onClickClassIntro = () => {
-    setCurrent("classIntro");
-
-    if (current === "classIntro") {
-      setClassTextBold(700);
-    } else {
-      setClassTextBold(200);
-    }
-  };
-
-  const onClickCurriculum = () => {
-    setCurrent("curriculum");
-
-    if (current === "curriculum") {
-      setCurriculumTextBold(700);
-    } else {
-      setCurriculumTextBold(200);
-    }
-  };
-
-  const onClickTeacherIntro = () => {
-    setCurrent("teacherIntro");
-
-    if (current === "teacherIntro") {
-      setTeacherIntroTextBold(700);
-    } else {
-      setTeacherIntroTextBold(200);
-    }
-  };
-
-  const onClickReview = () => {
-    setCurrent("review");
-
-    if (current === "review") {
-      setReviewTextBold(700);
-    } else {
-      setReviewTextBold(200);
-    }
+  const handleTagClick = (tag) => {
+    setCurrent(tag);
   };
 
   return (
@@ -100,23 +60,52 @@ export default function Class(props) {
           </style.IconBlock>
         </style.BottomBlock>
       </style.Wrap>
-      <style.NavigateBlock>
+      <style.ContentBlock>
         <style.Wrap>
-          <style.SpanBlock textBold={classIntroTextBold}>
-            <span onClick={onClickClassIntro}>수업 소개 </span>
-          </style.SpanBlock>
-          <style.SpanBlock textBold={curriculumTextBold}>
-            <span onClick={onClickCurriculum}>교육과정 </span>
-          </style.SpanBlock>
-          <style.SpanBlock textBold={teacherIntroTextBold}>
-            <span onClick={onClickTeacherIntro}>선생님 소개 </span>
-          </style.SpanBlock>
-          <style.SpanBlock textBold={reviewTextBold}>
-            <span onClick={onClickReview}>후기</span>
-          </style.SpanBlock>
-
+          <style.NavigateBlock>
+            <style.SpanBlock textBold={current === "classIntro" ? 700 : 400}>
+              <span
+                onClick={() => {
+                  handleTagClick("classIntro");
+                }}
+              >
+                수업 소개
+              </span>
+            </style.SpanBlock>
+            <style.SpanBlock textBold={current === "curriculum" ? 700 : 400}>
+              <span
+                onClick={() => {
+                  handleTagClick("curriculum");
+                }}
+              >
+                교육과정
+              </span>
+            </style.SpanBlock>
+            <style.SpanBlock textBold={current === "teacherIntro" ? 700 : 400}>
+              <span
+                onClick={() => {
+                  handleTagClick("teacherIntro");
+                }}
+              >
+                선생님 소개
+              </span>
+            </style.SpanBlock>
+            <style.SpanBlock textBold={current === "review" ? 700 : 400}>
+              <span
+                onClick={() => {
+                  handleTagClick("review");
+                }}
+              >
+                후기
+              </span>
+            </style.SpanBlock>
+          </style.NavigateBlock>
           {current === "classIntro" && (
             <ClassIntro
+              startDate={"2023.03.29"}
+              endDate={"2023.04.29"}
+              classDate={"목요일"}
+              classTime={"14:00 ~ 16:00"}
               explain={"부드러운 실을 이용하여 총 4개의 작품을 만들어요."}
               src1={process.env.PUBLIC_URL + "/Images/ClassCard/ClassImg.svg"}
               src2={process.env.PUBLIC_URL + "/Images/ClassCard/ClassImg.svg"}
@@ -153,7 +142,7 @@ export default function Class(props) {
             />
           )}
         </style.Wrap>
-      </style.NavigateBlock>
+      </style.ContentBlock>
       <Footer title={title} />
     </div>
   );
