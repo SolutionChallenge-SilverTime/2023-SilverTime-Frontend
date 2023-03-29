@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
 import * as style from "./styles";
 import Header from "../../../Components/Header/Header";
 import Footer from "../../../Components/Footer/Footer";
@@ -7,27 +9,67 @@ import Curriculum from "../../../Components/ClassDetail/Curriculum/Curriculum";
 import TeacherIntro from "../../../Components/ClassDetail/TeacherIntro/TeacherIntro";
 import Review from "../../../Components/ClassDetail/Review/Review";
 import FloatingButton from "../../../Components/Button/FloatingButton";
+import Modal from "../../../Components/Modal/Modal";
+import { ModalProvider } from "styled-react-modal";
 
 export default function Class(props) {
   const title = "수업";
+  const location = useLocation();
+  const userId = sessionStorage.getItem("userId");
+  const id = location.state.key;
+  const [adata, setData] = useState([]);
   const [current, setCurrent] = useState("classIntro");
+
+  useEffect(() => {
+    const url = `http://localhost:8080/user-lecture/information?lectureId=${location.state.key}&userId=${userId}`;
+    axios
+      .get(url)
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [userId]);
 
   const handleTagClick = (tag) => {
     setCurrent(tag);
   };
 
+  const lectureImageArray = adata.lectureIntroImagesUrl.map((item) => ({
+    src: item,
+  }));
+
+  const curriculumContentArray = adata.curriculumContents.map((item) => ({
+    content: item,
+  }));
+
+  const curriculumImageUrlArray = adata.curriculumImagesUrl.map((item) => ({
+    src: item,
+  }));
+
+  const obj = {
+    data: [
+      lectureImageArray,
+      curriculumContentArray,
+      curriculumImageUrlArray,
+    ]
+  };
+
   return (
-    <div>
+    <ModalProvider>
       <Header title={title} />
       <FloatingButton />
       <style.Wrap>
         <style.SpanBlock>
-          <span>
-            {"선생님 이름" + " | " + "카테고리명" + " | " + "6명 모집"}
-          </span>
+          {`${adata.tutorName}` +
+            " | " +
+            `${adata.category}` +
+            " | " +
+            `${adata.maxPeople}명 모집`}
         </style.SpanBlock>
         <style.NameBlock>
-          <span>{"뜨개질 수업(집중력 향상에 도움이 되는 뜨개질 수업)"}</span>
+          <span>{adata.title}</span>
         </style.NameBlock>
         <style.IconBlock>
           <img
@@ -35,14 +77,14 @@ export default function Class(props) {
           />
           <style.DetailBlock>
             <span>{"이 글에 관심이 있어요"}</span>
-            <span>{1}</span>
+            <span>{adata.likeCount}</span>
           </style.DetailBlock>
         </style.IconBlock>
         <style.IconBlock>
           <img src={process.env.PUBLIC_URL + "/Images/ClassCard/MenIcon.svg"} />
           <style.DetailBlock>
             <span>{"현재 신청 인원"}</span>
-            <span>{"2명 / 6명"}</span>
+            <span>{`${adata.presentPeople}명 / ${adata.maxPeople}명`}</span>
           </style.DetailBlock>
         </style.IconBlock>
         <style.BottomBlock>
@@ -50,13 +92,12 @@ export default function Class(props) {
             <img src={process.env.PUBLIC_URL + "/Images/Class/LinkIcon.svg"} />
             <span>{"공유하기"}</span>
           </style.IconBlock>
-          <style.IconBlock>
-            <img src={process.env.PUBLIC_URL + "/Images/Class/MapIcon.svg"} />
-            <span>{"위치정보"}</span>
-          </style.IconBlock>
+          <Modal />
           <style.IconBlock>
             <img src={process.env.PUBLIC_URL + "/Images/Class/CheckIcon.svg"} />
-            <span>{"신청하기"}</span>
+            <span onClick={() => alert("이 수업을 신청하시겠습니까?")}>
+              {"신청하기"}
+            </span>
           </style.IconBlock>
         </style.BottomBlock>
       </style.Wrap>
@@ -106,7 +147,7 @@ export default function Class(props) {
               endDate={"2023.04.29"}
               classDate={"목요일"}
               classTime={"14:00 ~ 16:00"}
-              explain={"부드러운 실을 이용하여 총 4개의 작품을 만들어요."}
+              explain={adata.lectureIntro}
               src1={process.env.PUBLIC_URL + "/Images/ClassCard/ClassImg.svg"}
               src2={process.env.PUBLIC_URL + "/Images/ClassCard/ClassImg.svg"}
               src3={process.env.PUBLIC_URL + "/Images/ClassCard/ClassImg.svg"}
@@ -124,13 +165,11 @@ export default function Class(props) {
           )}
           {current === "teacherIntro" && (
             <TeacherIntro
-              src={process.env.PUBLIC_URL + "/Images/ClassCard/ClassImg.svg"}
-              name={"홍길동"}
-              gender={"여"}
-              age={"33세"}
-              explain={
-                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-              }
+              src={adata.profileUrl}
+              name={adata.tutorName}
+              gender={adata.tutorGender}
+              age={adata.tutorBirth.substr(0, 10)}
+              explain={adata.tutorIntro}
             />
           )}
           {current === "review" && (
@@ -144,6 +183,6 @@ export default function Class(props) {
         </style.Wrap>
       </style.ContentBlock>
       <Footer title={title} />
-    </div>
+    </ModalProvider>
   );
 }

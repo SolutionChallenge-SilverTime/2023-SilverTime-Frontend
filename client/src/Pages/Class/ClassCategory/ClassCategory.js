@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import * as style from "./styles";
 import Header from "../../../Components/Header/Header";
 import Footer from "../../../Components/Footer/Footer";
@@ -11,9 +11,11 @@ import YellowFullButton from "../../../Components/Button/YellowFullButton";
 
 export default function ClassCategory() {
   const location = useLocation();
+  const navigate = useNavigate();
   const title = "수업";
   const userId = sessionStorage.getItem("userId");
   const [adata, setData] = useState([]);
+
   const categoryOptions = [
     {
       id: 1,
@@ -53,7 +55,7 @@ export default function ClassCategory() {
   ];
 
   useEffect(() => {
-    const url = `http://104.154.76.168:8080/user-lecture/all?category=hobby&sort=like&userId=${userId}`;
+    const url = `http://localhost:8080/user-lecture/all?category=${location.state.value}&sort=like&userId=${userId}`;
     axios
       .get(url)
       .then((response) => {
@@ -67,11 +69,11 @@ export default function ClassCategory() {
   const objArray = adata.map((item) => ({
     key: item.lectureId,
     src: item.imageUrl,
-    distance: item.distance,
     className: item.title,
     classDays: item.monday,
     classTime: item.activityTime,
     classExplain: item.lectureIntro,
+    distance: item.distance,
     location: item.location,
     starCount: item.likeCount,
     registerCount: `${item.presentPeople}/${item.maxPeople}`,
@@ -102,16 +104,23 @@ export default function ClassCategory() {
         {obj.data.map((item) => {
           return (
             <ClassCard
-              key={item.id}
+              key={item.key}
               src={item.src}
-              distance={item.distance}
               className={item.className}
+              distance={item.distance}
               classDays={item.classDays}
               classTime={item.classTime}
               classExplain={item.classExplain}
               location={item.location}
               starCount={item.starCount}
               registerCount={item.registerCount}
+              onClick={() => {
+                navigate("/class", {
+                  state: {
+                    key: item.key,
+                  },
+                });
+              }}
             />
           );
         })}
