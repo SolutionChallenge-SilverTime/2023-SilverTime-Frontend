@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+
+import { useLocation, useNavigate } from "react-router-dom";
+
 import * as style from "./styles";
 import Header from "../../../Components/Header/Header";
 import Footer from "../../../Components/Footer/Footer";
@@ -16,6 +17,7 @@ export default function ClassCategory() {
   const title = "수업";
   const userId = sessionStorage.getItem("userId");
   const [adata, setData] = useState([]);
+
   const categoryOptions = [
     {
       id: 1,

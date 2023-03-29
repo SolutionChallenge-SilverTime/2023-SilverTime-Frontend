@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+
 import { useLocation } from "react-router-dom";
+import axios from "axios";
+
 import * as style from "./styles";
 import Header from "../../../Components/Header/Header";
 import Footer from "../../../Components/Footer/Footer";
@@ -9,19 +11,19 @@ import Curriculum from "../../../Components/ClassDetail/Curriculum/Curriculum";
 import TeacherIntro from "../../../Components/ClassDetail/TeacherIntro/TeacherIntro";
 import Review from "../../../Components/ClassDetail/Review/Review";
 import FloatingButton from "../../../Components/Button/FloatingButton";
+import Modal from "../../../Components/Modal/Modal";
+import { ModalProvider } from "styled-react-modal";
 
 export default function Class(props) {
   const location = useLocation();
   const title = "수업";
+
+  const location = useLocation();
+
   const userId = sessionStorage.getItem("userId");
   const id = location.state.key;
   const [adata, setData] = useState([]);
   const [current, setCurrent] = useState("classIntro");
-
-  const [classIntroTextBold, setClassTextBold] = useState(700);
-  const [curriculumTextBold, setCurriculumTextBold] = useState(200);
-  const [teacherIntroTextBold, setTeacherIntroTextBold] = useState(200);
-  const [reviewTextBold, setReviewTextBold] = useState(200);
   useEffect(() => {
     const url = `http://localhost:8080/user-lecture/information?lectureId=${location.state.key}&userId=${userId}`;
     axios
@@ -33,18 +35,41 @@ export default function Class(props) {
         console.error(error);
       });
   }, [userId]);
+
   console.log(adata.curriculumImagesUrl);
+
 
   const handleTagClick = (tag) => {
     setCurrent(tag);
   };
 
+  const lectureImageArray = adata.lectureIntroImagesUrl.map((item) => ({
+    src: item,
+  }));
+
+  const curriculumContentArray = adata.curriculumContents.map((item) => ({
+    content: item,
+  }));
+
+  const curriculumImageUrlArray = adata.curriculumImagesUrl.map((item) => ({
+    src: item,
+  }));
+
+  const obj = {
+    data: [
+      lectureImageArray,
+      curriculumContentArray,
+      curriculumImageUrlArray,
+    ]
+  };
+
   return (
-    <div>
+    <ModalProvider>
       <Header title={title} />
       <FloatingButton />
       <style.Wrap>
         <style.SpanBlock>
+
           <span>
             {`${adata.tutorName}` +
               " | " +
@@ -52,6 +77,7 @@ export default function Class(props) {
               " | " +
               `${adata.maxPeople}명 모집`}
           </span>
+
         </style.SpanBlock>
         <style.NameBlock>
           <span>{adata.title}</span>
@@ -77,13 +103,12 @@ export default function Class(props) {
             <img src={process.env.PUBLIC_URL + "/Images/Class/LinkIcon.svg"} />
             <span>{"공유하기"}</span>
           </style.IconBlock>
-          <style.IconBlock>
-            <img src={process.env.PUBLIC_URL + "/Images/Class/MapIcon.svg"} />
-            <span>{"위치정보"}</span>
-          </style.IconBlock>
+          <Modal />
           <style.IconBlock>
             <img src={process.env.PUBLIC_URL + "/Images/Class/CheckIcon.svg"} />
-            <span>{"신청하기"}</span>
+            <span onClick={() => alert("이 수업을 신청하시겠습니까?")}>
+              {"신청하기"}
+            </span>
           </style.IconBlock>
         </style.BottomBlock>
       </style.Wrap>
@@ -169,6 +194,6 @@ export default function Class(props) {
         </style.Wrap>
       </style.ContentBlock>
       <Footer title={title} />
-    </div>
+    </ModalProvider>
   );
 }
