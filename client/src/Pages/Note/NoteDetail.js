@@ -1,30 +1,27 @@
+import React from "react";
 import * as style from "./styles";
 import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
 import NoteItem from "../../Components/NoteItem/NoteItem";
-import React from "react";
-import { useLocation } from "react-router-dom";
-import axios from "axios";
+
+
 
 export default function NoteDetail() {
-  const title = "특이사항 확인";
-  const location = useLocation();
+  const title = "특이사항 확인"
 
   return (
     <div>
       <Header title={title} />
       <style.DetailWrap>
         <div>
-          <span>{location.state.className}</span>
+          <span>{"클래스 이름"}</span>
         </div>
         <NoteItem
-          src={location.state.src}
-          guardianName={location.state.guardianName}
-          date={location.state.date}
-          title={location.state.seniorName}
-        />
-        <div>{location.state.title}</div>
-        <div>{location.state.content}</div>
+          guardianName={"ooo"}
+          date={"2023.1.23"}
+          title={"ooo 어르신"}/>
+        <div>{"제목"}</div>
+        <div>{"ooo 어르신은 ..."}</div>
       </style.DetailWrap>
       <Footer title={title} />
     </div>
