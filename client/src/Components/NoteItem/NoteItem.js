@@ -8,10 +8,10 @@ export default function NoteItem(props) {
       <style.RightBlock>
         <style.TopBlock>
           <style.NameBlock>
-            <span>{props.guardianName  + " 보호자"}</span>
+            <span>{props.identity === 2 ? props.guardianName  + " 보호자" : props.tutorName + " 선생님"}</span>
             <span>{props.className}</span>
           </style.NameBlock>
-          <span>{props.date || "2023.03.25"}</span>
+          <span>{props.date}</span>
         </style.TopBlock>
         <span>{props.title}</span>
       </style.RightBlock>

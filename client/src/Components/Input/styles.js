@@ -23,6 +23,10 @@ export const InputBlock = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  > img {
+    width: ${(props) => props.width};
+    height: ${(props) => props.height};
+  }
   > input {
     margin-top: 5px;
     background-color: ${(props) => props.backgroundColor || "#FFFFFF"};
@@ -38,6 +42,12 @@ export const InputBlock = styled.div`
       border: 2px solid ${(props) => props.stroke || "#FF7F00"};
       outline: none;
       transition: 0.5s ease;
+    }
+    ::-webkit-input-placeholder {
+      color: ${(props) => props.placeholderColor};
+    }
+    :-ms-input-placeholder {
+      color: ${(props) => props.placeholderColor};
     }
   }
 `;

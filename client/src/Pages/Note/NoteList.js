@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import * as style from "./styles";
 import Header from "../../Components/Header/Header";
@@ -8,32 +9,39 @@ import SearchBox from "../../Components/SearchBox/SearchBox";
 import NoteItem from "../../Components/NoteItem/NoteItem";
 
 export default function NoteList() {
-  const title = "특이사항 목록"
+  const nickName = sessionStorage.getItem("nickName");
+  const identity = sessionStorage.getItem("identity");
+  const title = "특이사항 목록";
   const navigate = useNavigate();
+  const [adata, setData] = useState([]);
+
+
+  useEffect(() => {
+    const url = `http://104.154.76.168:8080/significant/tutorSendingList/${nickName}`;
+    axios
+      .get(url)
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [nickName]);
+
+  const objArray = adata.map((item) => ({
+    id: item.significantId,
+    src: item.guardianProfileUrl,
+    tutorName: item.tutorName,
+    seniorName: item.seniorName,
+    guardianName: item.guardianName,
+    className: item.lectureName,
+    date: item.createDate.substr(0, 10),
+    title: item.title,
+    content: item.content,
+  }));
 
   const obj = {
-    data: [
-      { 
-        id: 1,
-        src: process.env.PUBLIC_URL + "/Images/Header/HeartIcon.svg",
-        guardianName: "홍길동",
-        className: "스마트폰 수업", 
-        date: "2023.03.22",
-        title: "홍길동 어르신 특이사항",
-      },
-      { 
-        id: 2,
-        src: process.env.PUBLIC_URL + "/Images/Header/HeartIcon.svg",
-        guardianName: "김영수",
-        className: "스마트폰 수업", 
-        date: "2023.03.22",
-        title: "홍길동 어르신 특이사항",
-      },
-    ]
-  }
-
-  const onClickItem = () => {
-    navigate("../noteDetail")
+    data: objArray,
   };
 
   return (
@@ -41,8 +49,12 @@ export default function NoteList() {
       <Header title={title} />
       <FloatingButton />
       <style.Wrap>
-        <SearchBox
+        <SearchBox 
+          width={"28px"}
+          height={"28px"}
+          page={"특이사항 목록"}
           color={"#FF7F00"}
+          placeholderColor={"#FFFFFF"} 
         />
       </style.Wrap>
       {obj.data.map((item) => {
@@ -51,12 +63,28 @@ export default function NoteList() {
             key={item.id}
             src={item.src}
             guardianName={item.guardianName}
+            tutorName={item.tutorName}
             className={item.className}
             date={item.date}
             title={item.title}
-            onClick={onClickItem}
+            onClick={() => {
+              navigate("/noteDetail", {
+                state: {
+                  key: item.id,
+                  src: item.src,
+                  guardianName: item.guardianName,
+                  tutorName: item.tutorName,
+                  className: item.className,
+                  date: item.date,
+                  title: item.title,
+                  seniorName: item.seniorName,
+                  content: item.content,
+                  identity: identity,
+                },
+              });
+            }}
           />
-        )
+        );
       })}
       <Footer title={title} />
     </div>

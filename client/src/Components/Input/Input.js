@@ -3,25 +3,21 @@ import * as style from "./styles";
 
 export default function Input(props) {
   return (
-    <style.Wrap
-      backgroundColor={props.backgroundColor}
-      top={props.top}
-    >
-      <style.TitleBlock
-        titleWeight={props.titleWeight}
-        titleSize={props.titleSize}
-      >
-        {props.title !== null ? <span>{props.title}</span> : null }
+    <style.Wrap backgroundColor={props.backgroundColor} top={props.top}>
+      <style.TitleBlock titleWeight={props.title} titleSize={props.titleSize}>
+        {props.title && <span>{props.title}</span>}
       </style.TitleBlock>
       <style.InputBlock
         stroke={props.stroke}
         backgroundColor={props.backgroundColor}
         fontWeight={props.fontWeight}
         fontSize={props.fontSize}
-        height={props.height}
         border={props.border}
+        placeholderColor={props.placeholderColor}
       >
-        {props.src !== null ? <img src={props.src} /> : null }
+        {props.src && (
+          <img src={props.src} width={props.width} height={props.height} />
+        )}
         <input
           name={props.name}
           onClick={props.onClick}
