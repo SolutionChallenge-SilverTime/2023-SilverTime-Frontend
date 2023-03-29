@@ -15,26 +15,30 @@ export default function ClassCard(props) {
       <style.ExplainBlock>
         {props.classExplain}
       </style.ExplainBlock>
-      <style.ClassInfoBlock>
-        <style.IconBlock>
-          <img src={process.env.PUBLIC_URL + "/Images/ClassCard/MapIcon.svg"} />
-          <span>{props.location}</span>
-        </style.IconBlock>
-        <style.BottomBlock>
+      <style.ETCBlock>
+        <style.DistanceBlock>{props.distance + " m"}</style.DistanceBlock>
+        <style.ClassInfoBlock>
           <style.IconBlock>
-            <img
-              src={process.env.PUBLIC_URL + "/Images/ClassCard/StarIcon.svg"}
-            />
-            <span>{props.starCount}</span>
+            <img src={process.env.PUBLIC_URL + "/Images/ClassCard/MapIcon.svg"} />
+            <span>{props.location}</span>
           </style.IconBlock>
-          <style.IconBlock>
-            <img
-              src={process.env.PUBLIC_URL + "/Images/ClassCard/MenIcon.svg"}
-            />
-            <span>{props.registerCount}</span>
-          </style.IconBlock>
-        </style.BottomBlock>
-      </style.ClassInfoBlock>
+          <style.BottomBlock>
+            <style.IconBlock>
+              <img
+                src={process.env.PUBLIC_URL + "/Images/ClassCard/StarIcon.svg"}
+              />
+              <span>{props.starCount}</span>
+            </style.IconBlock>
+            <style.IconBlock>
+              <img
+                src={process.env.PUBLIC_URL + "/Images/ClassCard/MenIcon.svg"}
+              />
+              <span>{props.registerCount}</span>
+            </style.IconBlock>
+          </style.BottomBlock>
+        </style.ClassInfoBlock>
+      </style.ETCBlock>
+      
     </style.Wrap>
   );
 }
