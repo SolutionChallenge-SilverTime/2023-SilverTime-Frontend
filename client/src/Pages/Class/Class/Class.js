@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+
 import * as style from "./styles";
 import Header from "../../../Components/Header/Header";
 import Footer from "../../../Components/Footer/Footer";
@@ -13,13 +15,15 @@ import Modal from "../../../Components/Modal/Modal";
 import { ModalProvider } from "styled-react-modal";
 
 export default function Class(props) {
-  const title = "수업";
   const location = useLocation();
+  const title = "수업";
+
+  const location = useLocation();
+
   const userId = sessionStorage.getItem("userId");
   const id = location.state.key;
   const [adata, setData] = useState([]);
   const [current, setCurrent] = useState("classIntro");
-
   useEffect(() => {
     const url = `http://localhost:8080/user-lecture/information?lectureId=${location.state.key}&userId=${userId}`;
     axios
@@ -31,6 +35,9 @@ export default function Class(props) {
         console.error(error);
       });
   }, [userId]);
+
+  console.log(adata.curriculumImagesUrl);
+
 
   const handleTagClick = (tag) => {
     setCurrent(tag);
@@ -62,11 +69,15 @@ export default function Class(props) {
       <FloatingButton />
       <style.Wrap>
         <style.SpanBlock>
-          {`${adata.tutorName}` +
-            " | " +
-            `${adata.category}` +
-            " | " +
-            `${adata.maxPeople}명 모집`}
+
+          <span>
+            {`${adata.tutorName}` +
+              " | " +
+              `${adata.category}` +
+              " | " +
+              `${adata.maxPeople}명 모집`}
+          </span>
+
         </style.SpanBlock>
         <style.NameBlock>
           <span>{adata.title}</span>
@@ -174,7 +185,7 @@ export default function Class(props) {
           )}
           {current === "review" && (
             <Review
-              nickname={"만두"}
+              nickname={"익명"}
               review={
                 "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
               }

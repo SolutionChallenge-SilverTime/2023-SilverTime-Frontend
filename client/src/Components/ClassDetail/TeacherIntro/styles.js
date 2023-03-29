@@ -13,6 +13,7 @@ export const TopBlock = styled.div`
     margin-right: 20px;
     width: 200px;
     height: 200px;
+    border-radius: 30px;
   }
 `;
 
@@ -23,5 +24,5 @@ export const SpanBlock = styled.div`
 `;
 
 export const ExplainBlock = styled.div`
-  margin: 5px 0 20px 0;
+  margin: 20px 0;
 `;
