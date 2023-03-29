@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const CloseButton = styled.div`
   margin-left: auto;
+  margin-bottom: 10px;
   border: none;
   color: #141414;
   font-weight: 700;
