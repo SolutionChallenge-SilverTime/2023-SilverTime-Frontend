@@ -6,8 +6,7 @@ import Input from "../../Components/Input/Input";
 import OrangeFullButton from "../../Components/Button/OrangeFullButton";
 import OrangeStrokeButton from "../../Components/Button/OrangeStrokeButton";
 import FullButton from "../../Components/Button/FullButton";
-import NewModal from "../../Components/Modal/Modal";
-import { ModalProvider } from "styled-react-modal";
+import StrokeButton from "../../Components/Button/StrokeButton";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -29,7 +28,7 @@ export default function Login() {
     setUsertype("teacher");
     setIdentity(2);
   };
-  
+
   const handleNickname = (e) => {
     setNickname(e.target.value);
   };
@@ -42,7 +41,11 @@ export default function Login() {
     axios
       .post(
         "http://localhost:8080/auth/signin",
-        JSON.stringify({ identity: identity, nickName: nickname, password: pw }),
+        JSON.stringify({
+          identity: identity,
+          nickName: nickname,
+          password: pw,
+        }),
         {
           headers: { "Content-Type": `application/json` },
         }
@@ -57,7 +60,7 @@ export default function Login() {
           navigate("/main", {
             state: {
               usertype: usertype,
-            }
+            },
           });
         } else {
           alert("로그인 실패", "아이디나 비밀번호를 확인하세요.");
@@ -71,81 +74,78 @@ export default function Login() {
   };
 
   return (
-    <ModalProvider>
-      <style.Wrap>
-        <style.LogoBlock>
-          <img
-            className="logoImg"
-            alt="로고 이미지"
-            src={process.env.PUBLIC_URL +"/Images/Logo/Logo.svg"}
-            style={{ width: "300px", height: "300px", borderRadius: "20px" }}
-          />
-        </style.LogoBlock>
-        <span
-          className="type"
-          style={{ fontWeight: "600", fontSize: "16px", color: "#141414" }}
-        >
-          사용자 유형
-        </span>
-        <style.TypeButtonBlock>
-          {usertype === "senior" ? (
-            <OrangeFullButton
-              onClick={onClickSenior}
-              btnName={"어르신"}
-            ></OrangeFullButton>
-          ) : (
-            <OrangeStrokeButton
-              onClick={onClickSenior}
-              btnName={"어르신"}
-            ></OrangeStrokeButton>
-          )}
-          {usertype === "protector" ? (
-            <OrangeFullButton
-              onClick={onClickProtector}
-              btnName={"보호자"}
-            ></OrangeFullButton>
-          ) : (
-            <OrangeStrokeButton
-              onClick={onClickProtector}
-              btnName={"보호자"}
-            ></OrangeStrokeButton>
-          )}
-          {usertype === "teacher" ? (
-            <OrangeFullButton
-              onClick={onClickTeacher}
-              btnName={"선생님"}
-            ></OrangeFullButton>
-          ) : (
-            <OrangeStrokeButton
-              onClick={onClickTeacher}
-              btnName={"선생님"}
-            ></OrangeStrokeButton>
-          )}
-        </style.TypeButtonBlock>
-        <Input
-          name={"nickname"}
-          onChange={handleNickname}
-          title={"닉네임"}
-          value={nickname}
-          placeholder={"닉네임을 입력해주세요."}
+    <style.Wrap>
+      <style.LogoBlock>
+        <img
+          className="logoImg"
+          alt="로고 이미지"
+          src={process.env.PUBLIC_URL + "/Images/Logo/Logo.svg"}
+          style={{ width: "300px", height: "300px", borderRadius: "20px" }}
         />
-        <Input
-          name={"password"}
-          onChange={handlePw}
-          title={"비밀번호"}
-          value={pw}
-          placeholder={"비밀번호를 입력해주세요."}
-        />
-        <style.ButtonBlock>
-          <div>
-            <FullButton
-              onClick={onClickLoginButton}
-              btnName={"로그인"}
-            ></FullButton>
-            <NewModal />
-          </div>
-        </style.ButtonBlock>
-      </style.Wrap>
-    </ModalProvider>
+      </style.LogoBlock>
+      <span
+        className="type"
+        style={{ fontWeight: "600", fontSize: "20px", color: "#141414" }}
+      >
+        사용자 유형
+      </span>
+      <style.TypeButtonBlock>
+        {usertype === "senior" ? (
+          <OrangeFullButton
+            onClick={onClickSenior}
+            btnName={"어르신"}
+          ></OrangeFullButton>
+        ) : (
+          <OrangeStrokeButton
+            onClick={onClickSenior}
+            btnName={"어르신"}
+          ></OrangeStrokeButton>
+        )}
+        {usertype === "protector" ? (
+          <OrangeFullButton
+            onClick={onClickProtector}
+            btnName={"보호자"}
+          ></OrangeFullButton>
+        ) : (
+          <OrangeStrokeButton
+            onClick={onClickProtector}
+            btnName={"보호자"}
+          ></OrangeStrokeButton>
+        )}
+        {usertype === "teacher" ? (
+          <OrangeFullButton
+            onClick={onClickTeacher}
+            btnName={"선생님"}
+          ></OrangeFullButton>
+        ) : (
+          <OrangeStrokeButton
+            onClick={onClickTeacher}
+            btnName={"선생님"}
+          ></OrangeStrokeButton>
+        )}
+      </style.TypeButtonBlock>
+      <Input
+        name={"nickname"}
+        onChange={handleNickname}
+        title={"닉네임"}
+        value={nickname}
+        placeholder={"닉네임을 입력해주세요."}
+        titleWeight={600}
+      />
+      <Input
+        name={"password"}
+        onChange={handlePw}
+        title={"비밀번호"}
+        value={pw}
+        placeholder={"비밀번호를 입력해주세요."}
+        titleWeight={600}
+      />
+      <style.ButtonBlock>
+        <div>
+          <FullButton onClick={onClickLoginButton} btnName={"로그인"} />
+          <StrokeButton className="bottomButton" btnName={"회원가입"} />
+        </div>
+      </style.ButtonBlock>
+    </style.Wrap>
   );
 }
