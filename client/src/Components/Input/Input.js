@@ -4,10 +4,14 @@ import * as style from "./styles";
 export default function Input(props) {
   return (
     <style.Wrap backgroundColor={props.backgroundColor} top={props.top}>
-      <style.TitleBlock titleWeight={props.titleWeight} titleSize={props.titleSize}>
+      <style.TitleBlock
+        titleWeight={props.titleWeight}
+        titleSize={props.titleSize}
+      >
         {props.title && <span>{props.title}</span>}
       </style.TitleBlock>
       <style.InputBlock
+        inputheight={props.inputheight}
         stroke={props.stroke}
         backgroundColor={props.backgroundColor}
         fontWeight={props.fontWeight}

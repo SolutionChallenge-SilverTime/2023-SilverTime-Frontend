@@ -1,16 +1,21 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 
 export default function Map(props) {
   useEffect(() => {
     const initMap = () => {
       const map = new window.google.maps.Map(document.getElementById("map"), {
-        center: { lat: 37.5400456, lng: 126.9921017 },
-        zoom: 14
+        center: { lat: 37.5986511, lng: 127.0150691 },
+        zoom: 14,
       });
 
       const malls = [
-        { label: "우리집", name: "코엑스몰", lat: 37.5115557, lng: 127.0595261 },
-        { label: "수업", name: "고투몰", lat: 37.5062379, lng: 127.0050378 },
+        {
+          label: "우리집",
+          name: "코엑스몰",
+          lat: 37.5986511,
+          lng: 127.0150691,
+        },
+        { label: "수업", name: "고투몰", lat: 37.6010173, lng: 127.0158196 },
       ];
 
       const bounds = new window.google.maps.LatLngBounds();
@@ -20,7 +25,7 @@ export default function Map(props) {
         const marker = new window.google.maps.Marker({
           position: { lat, lng },
           label,
-          map
+          map,
         });
         bounds.extend(marker.position);
 
@@ -29,7 +34,7 @@ export default function Map(props) {
           infoWindow.setContent(name);
           infoWindow.open({
             anchor: marker,
-            map
+            map,
           });
         });
       });

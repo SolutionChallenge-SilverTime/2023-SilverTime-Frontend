@@ -39,7 +39,7 @@ export default function NoteSend() {
   const clickNoteButton = () => {
     axios
       .post(
-        "http://104.154.76.168:8080/significant/send",
+        "http://localhost:8080/significant/send",
         JSON.stringify({
           gurdianNickName: guardianName,
           tutorNickName: sessionStorage.getItem("nickName"),
@@ -99,7 +99,7 @@ export default function NoteSend() {
           onChange={handleNoteTitle}
         />
         <Input
-          height={"150px"}
+          inputheight={"150px"}
           title={"특이사항 작성"}
           border={"#FF7F00"}
           titleWeight={"500"}

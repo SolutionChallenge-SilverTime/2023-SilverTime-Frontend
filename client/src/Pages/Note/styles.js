@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Wrap = styled.div`
-    padding: 20px 20px 50px;
+  padding: 20px 20px 50px;
 `;
 
 export const DetailWrap = styled.div`
@@ -17,4 +17,8 @@ export const DetailWrap = styled.div`
       align-items: flex-start;
     }
   }
+`;
+
+export const empty = styled.div`
+  height: 100%;
 `;

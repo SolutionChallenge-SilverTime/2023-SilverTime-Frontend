@@ -15,9 +15,8 @@ export default function NoteList() {
   const navigate = useNavigate();
   const [adata, setData] = useState([]);
 
-
   useEffect(() => {
-    const url = `http://104.154.76.168:8080/significant/tutorSendingList/${nickName}`;
+    const url = `http://localhost:8080/significant/${identity}/${nickName}`;
     axios
       .get(url)
       .then((response) => {
@@ -49,17 +48,18 @@ export default function NoteList() {
       <Header title={title} />
       <FloatingButton />
       <style.Wrap>
-        <SearchBox 
+        <SearchBox
           width={"28px"}
           height={"28px"}
           page={"특이사항 목록"}
           color={"#FF7F00"}
-          placeholderColor={"#FFFFFF"} 
+          placeholderColor={"#FFFFFF"}
         />
       </style.Wrap>
       {obj.data.map((item) => {
         return (
           <NoteItem
+            page={title}
             key={item.id}
             src={item.src}
             guardianName={item.guardianName}

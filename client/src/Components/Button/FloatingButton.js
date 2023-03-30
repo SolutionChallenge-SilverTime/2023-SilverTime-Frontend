@@ -1,25 +1,23 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Chatbot from "../../Pages/Chatbot/Chatbot";
 import * as style from "./styles";
 
-export default function FloatingButton(props) {
+export default function FloatingButton() {
   const navigate = useNavigate();
+  const identity = sessionStorage.getItem("identity");
 
   return (
     <style.FloatingButton>
-      {props.usertype === "teacher" ? (
-        <>
-          <img
-            onClick={() => navigate("../classRegister")}
-            src={process.env.PUBLIC_URL + "/Images/Float/WriteIcon.svg"}
-          />
-          <Chatbot />
-        </>
-      ) : (
+      {identity == 1 && (
         <img
-          onClick={() => navigate("../chatbot")}
+          onClick={() => navigate("../noteList")}
           src={process.env.PUBLIC_URL + "/Images/Float/ChatbotIcon.svg"}
+        />
+      )}
+      {identity == 2 && (
+        <img
+          onClick={() => navigate("../noteSend")}
+          src={process.env.PUBLIC_URL + "/Images/Float/WriteIcon.svg"}
         />
       )}
     </style.FloatingButton>

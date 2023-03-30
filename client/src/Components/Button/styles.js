@@ -14,11 +14,12 @@ export const FloatingButton = styled.div`
   position: fixed;
   width: 100%;
   max-width: 480px;
-  top: 800px;
-  left: 960px;
+  top: 600px;
+  left: 860px;
+  z-index: 100;
   @media only screen and (max-width: 480px) {
-    top: 750px;
-    left: 360px;
+    top: 580px;
+    left: 380px;
   }
 `;
 

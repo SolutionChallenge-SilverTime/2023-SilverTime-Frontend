@@ -1,10 +1,6 @@
-
 import React, { useState, useEffect } from "react";
-
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-
-
 import * as style from "./styles";
 import Header from "../../../Components/Header/Header";
 import Footer from "../../../Components/Footer/Footer";
@@ -17,12 +13,13 @@ import Modal from "../../../Components/Modal/Modal";
 import { ModalProvider } from "styled-react-modal";
 
 export default function Class(props) {
-
   const location = useLocation();
   const title = "수업";
 
   const userId = sessionStorage.getItem("userId");
+  const identity = sessionStorage.getItem("identity");
   const id = location.state.key;
+
   const [adata, setData] = useState([]);
   const [current, setCurrent] = useState("classIntro");
   useEffect(() => {
@@ -39,11 +36,9 @@ export default function Class(props) {
 
   console.log(adata.curriculumImagesUrl);
 
-
   const handleTagClick = (tag) => {
     setCurrent(tag);
   };
-
 
   const lectureImageArray = adata.instroductionImages?.map((item) => ({
     src: item.imageUrl,
@@ -64,27 +59,22 @@ export default function Class(props) {
     reviewData: reviewArray,
   };
 
-
-
   return (
     <ModalProvider>
       <Header title={title} />
-      <FloatingButton />
+      {identity != 0 && <FloatingButton />}
       <style.Wrap>
         <style.SpanBlock>
           <span>
-
             {`${adata.tutorName}` +
               " | " +
               `${adata.categoryToKorean}` +
               " | " +
               `${adata.maxRegistrant}명 모집`}
-
-
           </span>
         </style.SpanBlock>
         <style.NameBlock>
-          <span>{"뜨개질 수업(집중력 향상에 도움이 되는 뜨개질 수업)"}</span>
+          <span>{adata.title}</span>
         </style.NameBlock>
         <style.IconBlock>
           <img
@@ -92,7 +82,7 @@ export default function Class(props) {
           />
           <style.DetailBlock>
             <span>{"이 글에 관심이 있어요"}</span>
-            <span>{1}</span>
+            <span>{adata.likeCount}</span>
           </style.DetailBlock>
         </style.IconBlock>
         <style.IconBlock>
@@ -100,7 +90,6 @@ export default function Class(props) {
           <style.DetailBlock>
             <span>{"현재 신청 인원"}</span>
             <span>{`${adata.presentRegistrant}명 / ${adata.maxRegistrant}명`}</span>
-
           </style.DetailBlock>
         </style.IconBlock>
         <style.BottomBlock>
@@ -111,7 +100,9 @@ export default function Class(props) {
           <Modal />
           <style.IconBlock>
             <img src={process.env.PUBLIC_URL + "/Images/Class/CheckIcon.svg"} />
-            <span onClick={() => alert("이 수업을 신청하시겠습니까?")}>{"신청하기"}</span>
+            <span onClick={() => alert("이 수업을 신청하시겠습니까?")}>
+              {"신청하기"}
+            </span>
           </style.IconBlock>
         </style.BottomBlock>
       </style.Wrap>
@@ -157,7 +148,6 @@ export default function Class(props) {
           </style.NavigateBlock>
           {current === "classIntro" && (
             <ClassIntro
-
               startDate={adata.startDate?.substr(0, 10)}
               endDate={adata.endDate?.substr(0, 10)}
               classDate={adata.adayOfWeek}
@@ -165,7 +155,6 @@ export default function Class(props) {
               explain={adata.instroduction}
               imageUrl={lectureImageArray}
             ></ClassIntro>
-
           )}
           {current === "curriculum" && (
             <div>
@@ -182,13 +171,11 @@ export default function Class(props) {
           )}
           {current === "teacherIntro" && (
             <TeacherIntro
-
               src={adata.profileUrl}
               name={adata.tutorName}
               gender={adata.gender}
               age={adata.birth.substr(0, 10)}
               explain={adata.tutorIntroduction}
-
             />
           )}
           {current === "review" && (

@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
 import { useLocation, useNavigate } from "react-router-dom";
-
 import * as style from "./styles";
 import Header from "../../../Components/Header/Header";
 import Footer from "../../../Components/Footer/Footer";
@@ -10,12 +8,14 @@ import SearchBox from "../../../Components/SearchBox/SearchBox";
 import Dropdown from "../../../Components/Dropdown/Dropdown";
 import ClassCard from "../../../Components/ClassCard/ClassCard";
 import YellowFullButton from "../../../Components/Button/YellowFullButton";
+import FloatingButton from "../../../Components/Button/FloatingButton";
 
 export default function ClassCategory() {
   const location = useLocation();
   const navigate = useNavigate();
   const title = "수업";
   const userId = sessionStorage.getItem("userId");
+  const identity = sessionStorage.getItem("identity");
   const [adata, setData] = useState([]);
 
   const categoryOptions = [
@@ -57,9 +57,10 @@ export default function ClassCategory() {
     },
     {
       id: 3,
-      label: "추천순",
+      label: "거리순",
     },
   ];
+
   useEffect(() => {
     const url = `http://localhost:8080/user-lecture/all?category=${location.state.value}&sort=like&userId=${userId}`;
     axios
@@ -71,6 +72,8 @@ export default function ClassCategory() {
         console.error(error);
       });
   }, [userId]);
+
+  console.log(adata);
   const objArray = adata.map((item) => ({
     key: item.lectureId,
     src: item.imageUrl,
@@ -83,6 +86,7 @@ export default function ClassCategory() {
     starCount: item.likeCount,
     registerCount: `${item.presentPeople}/${item.maxPeople}`,
   }));
+
   const obj = {
     data: objArray,
   };
@@ -92,6 +96,7 @@ export default function ClassCategory() {
       <Header title={title} />
       <style.Wrap>
         <SearchBox />
+        {identity != 0 && <FloatingButton />}
         <style.TopBlock>
           <Dropdown
             options={categoryOptions}

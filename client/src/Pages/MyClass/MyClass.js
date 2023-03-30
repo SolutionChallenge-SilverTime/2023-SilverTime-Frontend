@@ -4,9 +4,11 @@ import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
 import Dropdown from "../../Components/Dropdown/Dropdown";
 import ClassCard from "../../Components/ClassCard/ClassCard";
+import FloatingButton from "../../Components/Button/FloatingButton";
 
 export default function MyClass() {
   const title = "내 수업";
+  const identity = sessionStorage.getItem("identity");
 
   const stateOptions = [
     {
@@ -23,6 +25,7 @@ export default function MyClass() {
     <div>
       <Header title={title} />
       <style.Wrap>
+        {identity != 0 && <FloatingButton />}
         <style.TopBlock>
           <Dropdown
             width={"200px"}
@@ -32,7 +35,6 @@ export default function MyClass() {
           />
         </style.TopBlock>
         <ClassCard />
-        
       </style.Wrap>
       <Footer title={title} />
     </div>

@@ -4,34 +4,31 @@ import * as style from "./styles";
 import FullButton from "../../Components/Button/FullButton";
 import Footer from "../../Components/Footer/Footer";
 import Header from "../../Components/Header/Header";
-import Chatbot from "../Chatbot/Chatbot";
+import FloatingButton from "../../Components/Button/FloatingButton";
 
 export default function Main() {
   const title = "실버타임";
   const navigate = useNavigate();
+  const identity = sessionStorage.getItem("identity");
+  console.log(identity != 0);
 
-  const [nick, setNick] = useState(null);
-  const [userId, setUserId] = useState(null);
-  const [identity, setIdentity] = useState(null);
-
-  useEffect(() => {
-    if (sessionStorage.getItem("nickName") === null) {
-      console.log("isLogin ?? :: ", nick);
-    } else {
-      setNick(sessionStorage.getItem("nickName"));
-      setUserId(sessionStorage.getItem("userId"));
-      setIdentity(sessionStorage.getItem("identity"));
-      console.log("nickName :: ", nick);
-      console.log("userId ::", userId);
-      console.log("identity :: ", identity);
-    }
-  });
-
+  // useEffect(() => {
+  //   if (sessionStorage.getItem("nickName") === null) {
+  //     console.log("isLogin ?? :: ", nick);
+  //   } else {
+  //     setNick(sessionStorage.getItem("nickName"));
+  //     setUserId(sessionStorage.getItem("userId"));
+  //     setIdentity(sessionStorage.getItem("identity"));
+  //     console.log("nickName :: ", nick);
+  //     console.log("userId ::", userId);
+  //     console.log("identity :: ", identity);
+  //   }
+  // }, []);
   return (
     <div>
       <Header title={title} />
       <style.Wrap>
-        <Chatbot />
+        <FloatingButton />
         <FullButton
           fontSize={"30px"}
           btnName={"전체"}

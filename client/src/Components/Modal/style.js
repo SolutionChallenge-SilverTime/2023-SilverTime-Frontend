@@ -4,7 +4,7 @@ import Modal from "styled-react-modal";
 export const TypeModal = Modal.styled`
   padding:  20px;
   width: 70%;
-  height: 60%;
+  height: 70%;
   display: flex;
   flex-direction: column;
   justify-content: center;

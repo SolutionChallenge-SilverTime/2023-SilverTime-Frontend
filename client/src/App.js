@@ -3,7 +3,6 @@ import "./App.css";
 import Login from "./Pages/Login/Login";
 import Join from "./Pages/Join/Join";
 import Main from "./Pages/Main/Main";
-
 import ClassCategory from "./Pages/Class/ClassCategory/ClassCategory";
 import Class from "./Pages/Class/Class/Class";
 import RecommendClass from "./Pages/RecommendClass/RecommendClass";
@@ -28,14 +27,11 @@ function App() {
           <Route path="/aiClass" element={<RecommendClass />} />
           <Route path="/noteSend" element={<NoteSend />} />
           <Route path="/noteDetail" element={<NoteDetail />} />
-
           <Route path="/noteList" element={<NoteList />} />
-
           <Route path="/notice" element={<Notice />} />
           <Route path="/myClass" element={<MyClass />} />
           <Route path="/myPage" element={<MyPage />} />
           <Route path="/setting" element={<Setting />} />
-
         </Routes>
       </div>
     </BrowserRouter>

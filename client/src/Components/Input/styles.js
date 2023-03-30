@@ -31,7 +31,7 @@ export const InputBlock = styled.div`
     margin-top: 5px;
     background-color: ${(props) => props.backgroundColor || "#FFFFFF"};
     width: 100%;
-    height: ${(props) => props.height};
+    height: ${(props) => props.inputheight};
     border: 2px solid ${(props) => props.border || "#E0E0E0"};
     border-radius: 17px;
     padding: 12px 15px;
