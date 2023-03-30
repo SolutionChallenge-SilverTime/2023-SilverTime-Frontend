@@ -13,7 +13,7 @@ export default function RecommendClass() {
   const title = "AI 추천 수업";
   const [adata, setData] = useState([]);
   useEffect(() => {
-    const url = `http://localhost:8080/recommend`;
+    const url = `http://localhost:8080/lecture/recommend`;
     axios
       .get(url)
       .then((response) => {

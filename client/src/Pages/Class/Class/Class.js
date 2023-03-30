@@ -49,9 +49,14 @@ export default function Class(props) {
     content: item.content,
   }));
 
+  const reviewArray = adata.reviews?.map((item) => ({
+    content: item.content,
+    nickName: item.seniorNickName,
+  }));
+
   const obj = {
-    data1: lectureImageArray,
-    data2: curriculumArray,
+    curriculumData: curriculumArray,
+    reviewData: reviewArray,
   };
 
   return (
@@ -63,9 +68,9 @@ export default function Class(props) {
           <span>
             {`${adata.tutorName}` +
               " | " +
-              `${adata.category}` +
+              `${adata.categoryToKorean}` +
               " | " +
-              `${adata.maxPeople}명 모집`}
+              `${adata.maxRegistrant}명 모집`}
           </span>
         </style.SpanBlock>
         <style.NameBlock>
@@ -143,23 +148,20 @@ export default function Class(props) {
           </style.NavigateBlock>
           {current === "classIntro" && (
             <ClassIntro
-              startDate={"2023.03.29"}
-              endDate={"2023.04.29"}
-              classDate={"목요일"}
-              classTime={"14:00 ~ 16:00"}
+              startDate={adata.startDate?.substr(0, 10)}
+              endDate={adata.endDate?.substr(0, 10)}
+              classDate={adata.adayOfWeek}
+              classTime={adata.activityTime}
               explain={adata.instroduction}
-              src1={process.env.PUBLIC_URL + "/Images/ClassCard/ClassImg.svg"}
-              src2={process.env.PUBLIC_URL + "/Images/ClassCard/ClassImg.svg"}
-              src3={process.env.PUBLIC_URL + "/Images/ClassCard/ClassImg.svg"}
-              src4={process.env.PUBLIC_URL + "/Images/ClassCard/ClassImg.svg"}
-            />
+              imageUrl={lectureImageArray}
+            ></ClassIntro>
           )}
           {current === "curriculum" && (
             <div>
-              {obj.data2.map((item) => {
+              {obj.curriculumData.map((item, index) => {
                 return (
                   <Curriculum
-                    week={"1주차"}
+                    week={`${index + 1}주차`}
                     src={item.src}
                     explain={item.content}
                   />
@@ -172,17 +174,18 @@ export default function Class(props) {
               src={adata.profileUrl}
               name={adata.tutorName}
               gender={adata.gender}
-              age={adata.birth}
+              age={adata.birth.substr(0, 10)}
               explain={adata.tutorIntroduction}
             />
           )}
           {current === "review" && (
-            <Review
-              nickname={"익명"}
-              review={
-                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-              }
-            />
+            <div>
+              {obj.reviewData.map((item) => {
+                return (
+                  <Review nickname={item.nickName} review={item.content} />
+                );
+              })}
+            </div>
           )}
         </style.Wrap>
       </style.ContentBlock>
