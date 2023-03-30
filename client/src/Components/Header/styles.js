@@ -6,7 +6,6 @@ export const Wrap = styled.div`
   max-width: 480px;
   top: 0;
   background-color: #ffffff;
-  z-index: 100;
 `;
 
 export const Title = styled.div`

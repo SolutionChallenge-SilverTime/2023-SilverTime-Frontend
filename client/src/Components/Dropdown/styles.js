@@ -7,7 +7,7 @@ export const DropdownTitle = styled.div`
 `;
 
 export const DropdownContainer = styled.div`
-  width: 120px;
+  width: ${(props) => props.width || "120px"};
   height: 50px;
   background-color: ${(props) => props.backgroundColor || "#FF7F00"};
   position: relative;
@@ -27,6 +27,7 @@ export const DropdownInput = styled.div`
 `;
 
 export const DropdownMenu = styled.div`
+  width: ${(props) => props.width};
   margin-top: 5px;
   border: 1px solid #e0e0e0;
   border-radius: 10px;
