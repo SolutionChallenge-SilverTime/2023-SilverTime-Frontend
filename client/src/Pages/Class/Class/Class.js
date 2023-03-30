@@ -18,14 +18,12 @@ export default function Class(props) {
   const location = useLocation();
   const title = "수업";
 
-  const location = useLocation();
-
   const userId = sessionStorage.getItem("userId");
   const id = location.state.key;
   const [adata, setData] = useState([]);
   const [current, setCurrent] = useState("classIntro");
   useEffect(() => {
-    const url = `http://localhost:8080/user-lecture/information?lectureId=${location.state.key}&userId=${userId}`;
+    const url = `http://localhost:8080/lecture/detail/${location.state.key}`;
     axios
       .get(url)
       .then((response) => {
@@ -38,29 +36,22 @@ export default function Class(props) {
 
   console.log(adata.curriculumImagesUrl);
 
-
   const handleTagClick = (tag) => {
     setCurrent(tag);
   };
 
-  const lectureImageArray = adata.lectureIntroImagesUrl.map((item) => ({
-    src: item,
+  const lectureImageArray = adata.instroductionImages?.map((item) => ({
+    src: item.imageUrl,
   }));
 
-  const curriculumContentArray = adata.curriculumContents.map((item) => ({
-    content: item,
-  }));
-
-  const curriculumImageUrlArray = adata.curriculumImagesUrl.map((item) => ({
-    src: item,
+  const curriculumArray = adata.curriculums?.map((item) => ({
+    src: item.imageUrl,
+    content: item.content,
   }));
 
   const obj = {
-    data: [
-      lectureImageArray,
-      curriculumContentArray,
-      curriculumImageUrlArray,
-    ]
+    data1: lectureImageArray,
+    data2: curriculumArray,
   };
 
   return (
@@ -69,7 +60,6 @@ export default function Class(props) {
       <FloatingButton />
       <style.Wrap>
         <style.SpanBlock>
-
           <span>
             {`${adata.tutorName}` +
               " | " +
@@ -77,7 +67,6 @@ export default function Class(props) {
               " | " +
               `${adata.maxPeople}명 모집`}
           </span>
-
         </style.SpanBlock>
         <style.NameBlock>
           <span>{adata.title}</span>
@@ -95,7 +84,7 @@ export default function Class(props) {
           <img src={process.env.PUBLIC_URL + "/Images/ClassCard/MenIcon.svg"} />
           <style.DetailBlock>
             <span>{"현재 신청 인원"}</span>
-            <span>{`${adata.presentPeople}명 / ${adata.maxPeople}명`}</span>
+            <span>{`${adata.presentRegistrant}명 / ${adata.maxRegistrant}명`}</span>
           </style.DetailBlock>
         </style.IconBlock>
         <style.BottomBlock>
@@ -158,7 +147,7 @@ export default function Class(props) {
               endDate={"2023.04.29"}
               classDate={"목요일"}
               classTime={"14:00 ~ 16:00"}
-              explain={adata.lectureIntro}
+              explain={adata.instroduction}
               src1={process.env.PUBLIC_URL + "/Images/ClassCard/ClassImg.svg"}
               src2={process.env.PUBLIC_URL + "/Images/ClassCard/ClassImg.svg"}
               src3={process.env.PUBLIC_URL + "/Images/ClassCard/ClassImg.svg"}
@@ -166,21 +155,25 @@ export default function Class(props) {
             />
           )}
           {current === "curriculum" && (
-            <Curriculum
-              week={"1주차"}
-              src={process.env.PUBLIC_URL + "/Images/ClassCard/ClassImg.svg"}
-              explain={
-                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-              }
-            />
+            <div>
+              {obj.data2.map((item) => {
+                return (
+                  <Curriculum
+                    week={"1주차"}
+                    src={item.src}
+                    explain={item.content}
+                  />
+                );
+              })}
+            </div>
           )}
           {current === "teacherIntro" && (
             <TeacherIntro
               src={adata.profileUrl}
               name={adata.tutorName}
-              gender={adata.tutorGender}
-              age={adata.tutorBirth.substr(0, 10)}
-              explain={adata.tutorIntro}
+              gender={adata.gender}
+              age={adata.birth}
+              explain={adata.tutorIntroduction}
             />
           )}
           {current === "review" && (
