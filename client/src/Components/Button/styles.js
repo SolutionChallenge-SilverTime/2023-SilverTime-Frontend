@@ -32,7 +32,7 @@ export const FullButton = styled.div`
   margin: 20px 0;
   background: #ff7f00;
   border-radius: 20px;
-  padding: 20px;
+  padding: ${(props) => props.padding || "20px"};
   color: ${(props) => props.color || "black"};
   font-weight: 700;
   font-size: ${(props) => props.fontSize || "20px"};
@@ -65,7 +65,7 @@ export const YellowFullButton = styled.div`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   margin-top: 15px;
-  padding: 20px;
+  padding: 10px;
   background: #ffb800;
   border-radius: 10px;
   color: #ffffff;

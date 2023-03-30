@@ -4,10 +4,11 @@ import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
 import Input from "../../Components/Input/Input";
 import axios from "axios";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 
 export default function NoteSend() {
   const navigate = useNavigate();
+  const location = useLocation();
   const title = "특이사항 작성";
 
   const [guardianName, setGuardianName] = useState("");
@@ -82,6 +83,7 @@ export default function NoteSend() {
           border={"#FF7F00"}
           titleWeight={"500"}
           titleSize={"23px"}
+          placeholder={location.state.seniorName}
           onChange={handleSeniorName}
         />
         <Input
@@ -89,6 +91,7 @@ export default function NoteSend() {
           border={"#FF7F00"}
           titleWeight={"500"}
           titleSize={"23px"}
+          placeholder={location.state.className}
           onChange={handleClassName}
         />
         <Input
