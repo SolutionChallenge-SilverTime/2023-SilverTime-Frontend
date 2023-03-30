@@ -3,7 +3,7 @@ import * as style from "./styles";
 
 export default function ClassCard(props) {
   return (
-    <style.Wrap>
+    <style.Wrap onClick={props.onClick}>
       <img src={props.src} />
       <style.TopBlock>
         <span>{props.className}</span>
@@ -12,14 +12,16 @@ export default function ClassCard(props) {
           <span>{props.classTime}</span>
         </style.TimeBlock>
       </style.TopBlock>
-      <style.ExplainBlock>
-        {props.classExplain}
-      </style.ExplainBlock>
+      <style.ExplainBlock>{props.classExplain}</style.ExplainBlock>
       <style.ETCBlock>
-        <style.DistanceBlock>{props.distance + " m"}</style.DistanceBlock>
+        <style.DistanceBlock>
+          {props.distance && <span>{props.distance + " m"}</span>}
+        </style.DistanceBlock>
         <style.ClassInfoBlock>
           <style.IconBlock>
-            <img src={process.env.PUBLIC_URL + "/Images/ClassCard/MapIcon.svg"} />
+            <img
+              src={process.env.PUBLIC_URL + "/Images/ClassCard/MapIcon.svg"}
+            />
             <span>{props.location}</span>
           </style.IconBlock>
           <style.BottomBlock>
@@ -38,7 +40,6 @@ export default function ClassCard(props) {
           </style.BottomBlock>
         </style.ClassInfoBlock>
       </style.ETCBlock>
-      
     </style.Wrap>
   );
 }

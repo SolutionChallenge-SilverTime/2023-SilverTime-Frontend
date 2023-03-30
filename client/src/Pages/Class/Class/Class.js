@@ -1,4 +1,10 @@
-import React, { useState } from "react";
+
+import React, { useState, useEffect } from "react";
+
+import { useLocation } from "react-router-dom";
+import axios from "axios";
+
+
 import * as style from "./styles";
 import Header from "../../../Components/Header/Header";
 import Footer from "../../../Components/Footer/Footer";
@@ -11,12 +17,54 @@ import Modal from "../../../Components/Modal/Modal";
 import { ModalProvider } from "styled-react-modal";
 
 export default function Class(props) {
+
+  const location = useLocation();
   const title = "수업";
+
+  const userId = sessionStorage.getItem("userId");
+  const id = location.state.key;
+  const [adata, setData] = useState([]);
   const [current, setCurrent] = useState("classIntro");
+  useEffect(() => {
+    const url = `http://localhost:8080/lecture/detail/${location.state.key}`;
+    axios
+      .get(url)
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [userId]);
+
+  console.log(adata.curriculumImagesUrl);
+
 
   const handleTagClick = (tag) => {
     setCurrent(tag);
   };
+
+
+  const lectureImageArray = adata.instroductionImages?.map((item) => ({
+    src: item.imageUrl,
+  }));
+
+  const curriculumArray = adata.curriculums?.map((item) => ({
+    src: item.imageUrl,
+    content: item.content,
+  }));
+
+  const reviewArray = adata.reviews?.map((item) => ({
+    content: item.content,
+    nickName: item.seniorNickName,
+  }));
+
+  const obj = {
+    curriculumData: curriculumArray,
+    reviewData: reviewArray,
+  };
+
+
 
   return (
     <ModalProvider>
@@ -25,7 +73,14 @@ export default function Class(props) {
       <style.Wrap>
         <style.SpanBlock>
           <span>
-            {"선생님 이름" + " | " + "카테고리명" + " | " + "6명 모집"}
+
+            {`${adata.tutorName}` +
+              " | " +
+              `${adata.categoryToKorean}` +
+              " | " +
+              `${adata.maxRegistrant}명 모집`}
+
+
           </span>
         </style.SpanBlock>
         <style.NameBlock>
@@ -44,7 +99,8 @@ export default function Class(props) {
           <img src={process.env.PUBLIC_URL + "/Images/ClassCard/MenIcon.svg"} />
           <style.DetailBlock>
             <span>{"현재 신청 인원"}</span>
-            <span>{"2명 / 6명"}</span>
+            <span>{`${adata.presentRegistrant}명 / ${adata.maxRegistrant}명`}</span>
+
           </style.DetailBlock>
         </style.IconBlock>
         <style.BottomBlock>
@@ -101,44 +157,48 @@ export default function Class(props) {
           </style.NavigateBlock>
           {current === "classIntro" && (
             <ClassIntro
-              startDate={"2023.03.29"}
-              endDate={"2023.04.29"}
-              classDate={"목요일"}
-              classTime={"14:00 ~ 16:00"}
-              explain={"부드러운 실을 이용하여 총 4개의 작품을 만들어요."}
-              src1={process.env.PUBLIC_URL + "/Images/ClassCard/ClassImg.svg"}
-              src2={process.env.PUBLIC_URL + "/Images/ClassCard/ClassImg.svg"}
-              src3={process.env.PUBLIC_URL + "/Images/ClassCard/ClassImg.svg"}
-              src4={process.env.PUBLIC_URL + "/Images/ClassCard/ClassImg.svg"}
-            />
+
+              startDate={adata.startDate?.substr(0, 10)}
+              endDate={adata.endDate?.substr(0, 10)}
+              classDate={adata.adayOfWeek}
+              classTime={adata.activityTime}
+              explain={adata.instroduction}
+              imageUrl={lectureImageArray}
+            ></ClassIntro>
+
           )}
           {current === "curriculum" && (
-            <Curriculum
-              week={"1주차"}
-              src={process.env.PUBLIC_URL + "/Images/ClassCard/ClassImg.svg"}
-              explain={
-                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-              }
-            />
+            <div>
+              {obj.curriculumData.map((item, index) => {
+                return (
+                  <Curriculum
+                    week={`${index + 1}주차`}
+                    src={item.src}
+                    explain={item.content}
+                  />
+                );
+              })}
+            </div>
           )}
           {current === "teacherIntro" && (
             <TeacherIntro
-              src={process.env.PUBLIC_URL + "/Images/ClassCard/ClassImg.svg"}
-              name={"홍길동"}
-              gender={"여"}
-              age={"33세"}
-              explain={
-                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-              }
+
+              src={adata.profileUrl}
+              name={adata.tutorName}
+              gender={adata.gender}
+              age={adata.birth.substr(0, 10)}
+              explain={adata.tutorIntroduction}
+
             />
           )}
           {current === "review" && (
-            <Review
-              nickname={"만두"}
-              review={
-                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-              }
-            />
+            <div>
+              {obj.reviewData.map((item) => {
+                return (
+                  <Review nickname={item.nickName} review={item.content} />
+                );
+              })}
+            </div>
           )}
         </style.Wrap>
       </style.ContentBlock>

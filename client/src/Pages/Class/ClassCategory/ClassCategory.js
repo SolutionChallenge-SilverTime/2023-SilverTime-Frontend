@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+
 import { useLocation, useNavigate } from "react-router-dom";
+
 import * as style from "./styles";
 import Header from "../../../Components/Header/Header";
 import Footer from "../../../Components/Footer/Footer";
@@ -20,22 +22,27 @@ export default function ClassCategory() {
     {
       id: 1,
       label: "전체",
+      value: "all",
     },
     {
       id: 2,
       label: "교육",
+      value: "education",
     },
     {
       id: 3,
       label: "취미",
+      value: "hobby",
     },
     {
       id: 4,
       label: "건강",
+      value: "health",
     },
     {
       id: 5,
       label: "친목",
+      value: "social",
     },
   ];
 
@@ -53,7 +60,6 @@ export default function ClassCategory() {
       label: "추천순",
     },
   ];
-
   useEffect(() => {
     const url = `http://localhost:8080/user-lecture/all?category=${location.state.value}&sort=like&userId=${userId}`;
     axios
@@ -65,7 +71,6 @@ export default function ClassCategory() {
         console.error(error);
       });
   }, [userId]);
-
   const objArray = adata.map((item) => ({
     key: item.lectureId,
     src: item.imageUrl,
@@ -78,7 +83,6 @@ export default function ClassCategory() {
     starCount: item.likeCount,
     registerCount: `${item.presentPeople}/${item.maxPeople}`,
   }));
-
   const obj = {
     data: objArray,
   };
