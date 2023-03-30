@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
+import * as style from "./styles";
 
 export default function Chatbot() {
   useEffect(() => {
     (function(d, m){
       const kommunicateSettings = {
-        "appId": "<YOUR APP_ID>",
+        "appId": "c4414d1878a1fcb5e4cf8473ff06680f",
         "popupWidget": true,
-        "automaticChatOpenOnNavigation": true
+        "automaticChatOpenOnNavigation": true,
       };
 
       const s = document.createElement("script"); 
@@ -21,5 +22,10 @@ export default function Chatbot() {
       m._globals = kommunicateSettings;
     })(document, window.kommunicate || {});
   }, []);
-  return <div></div>;
+
+  return (
+    <style.ChatbotWrapper>
+      <div></div>
+    </style.ChatbotWrapper>
+  );
 }

@@ -8,7 +8,13 @@ export default function NoteItem(props) {
       <style.RightBlock>
         <style.TopBlock>
           <style.NameBlock>
-            <span>{props.identity === 2 ? props.guardianName  + " 보호자" : props.tutorName + " 선생님"}</span>
+            {props.page !== "알림" &&
+              (props.identity === 2 ? (
+                <span>{props.guardianName} 보호자</span>
+              ) : (
+                <span>{props.tutorName} 선생님</span>
+              ))}
+            {props.page === "알림" && <span>{props.noticeTitle}</span>}
             <span>{props.className}</span>
           </style.NameBlock>
           <span>{props.date}</span>
