@@ -26,14 +26,11 @@ export default function MyClass() {
       <Header title={title} />
       <style.Wrap>
         {identity != 0 && <FloatingButton />}
-        <style.TopBlock>
           <Dropdown
-            width={"200px"}
+            width={"280px"}
             options={stateOptions}
             placeholder={"진행중인 수업"}
-            backgroundColor={"#ffb800"}
           />
-        </style.TopBlock>
         <ClassCard />
       </style.Wrap>
       <Footer title={title} />

@@ -73,7 +73,6 @@ export default function ClassCategory() {
       });
   }, [userId]);
 
-  console.log(adata);
   const objArray = adata.map((item) => ({
     key: item.lectureId,
     src: item.imageUrl,
