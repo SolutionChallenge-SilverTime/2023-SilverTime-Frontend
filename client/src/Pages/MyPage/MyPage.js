@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import * as style from "./styles";
 import Input from "../../Components/Input/Input";
 import OrangeFullButton from "../../Components/Button/OrangeFullButton";
@@ -7,28 +8,61 @@ import Footer from "../../Components/Footer/Footer";
 
 export default function MyPage() {
   const title = "내 정보";
-
+  const userId = sessionStorage.getItem("userId");
+  const [adata, setData] = useState([]);
+  useEffect(() => {
+    const url = `http://localhost:8080/auth/tutor/mypage/${userId}`;
+    axios
+      .get(url)
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+  console.log(adata);
   return (
     <div>
       <Header title={title} />
       <style.Wrap>
         <style.LogoBlock>
-          <img
-            className="userImg"
-            alt="로고 이미지"
-            src={process.env.PUBLIC_URL + "/Images/Join/UserImgIcon.svg"}
-          />
+          <img className="userImg" alt="로고 이미지" src={adata.profileUrl} />
         </style.LogoBlock>
         <h2>회원 정보</h2>
-        <Input name={"nickname"} title={"닉네임"} plcaeholder={""} />
-        <Input name={"pw"} title={"비밀번호"} placeholder={""} />
-        <Input name={"name"} title={"이름"} placeholder={""} />
-        <Input name={"gender"} title={"성별"} placeholder={""} />
-        <Input name={"birth"} title={"생년월일"} placeholder={""} />
-        <Input name={"email"} title={"이메일"} placeholder={""} />
-        <Input name={"phone"} title={"전화번호"} placeholder={""} />
-        <Input name={"area"} title={"교육활동지"} placeholder={""} />
-        <Input name={"explain"} title={"소개"} placeholder={""} />
+        <Input
+          name={adata.nickName}
+          title={"닉네임"}
+          placeholder={adata.nickName}
+        />
+        <Input
+          name={adata.password}
+          title={"비밀번호"}
+          placeholder={adata.password}
+        />
+        <Input name={adata.name} title={"이름"} placeholder={adata.password} />
+        <Input name={adata.gender} title={"성별"} placeholder={adata.gender} />
+        <Input
+          name={adata.birth?.substr(0, 10)}
+          title={"생년월일"}
+          placeholder={adata.birth?.substr(0, 10)}
+        />
+        <Input name={adata.email} title={"이메일"} placeholder={adata.email} />
+        <Input
+          name={adata.phone}
+          title={"전화번호"}
+          placeholder={adata.phone}
+        />
+        <Input
+          name={adata.address}
+          title={"교육활동지"}
+          placeholder={adata.address}
+        />
+        <Input
+          name={adata.introduction}
+          title={"소개"}
+          placeholder={adata.introduction}
+        />
         <style.ButtonBlock>
           <OrangeFullButton
             btnName={"수정하기"}
