@@ -1,15 +1,15 @@
 import styled from "styled-components";
 
 export const Wrap = styled.div`
-  position: sticky;
+  position: absolute;
   width: 100%;
-  max-width: 480px;
+  display: flex;
   bottom: 0;
   background-color: #ffffff;
 `;
 
 export const Menu = styled.div`
-  max-width: 480px;
+  width: 100%;
   height: 60px;
   display: grid;
   align-items: center;
