@@ -40,7 +40,7 @@ export default function NoteSend() {
   const clickNoteButton = () => {
     axios
       .post(
-        "http://localhost:8080/significant/send",
+        "http://104.154.76.168:8080/significant/send",
         JSON.stringify({
           gurdianNickName: guardianName,
           tutorNickName: sessionStorage.getItem("nickName"),

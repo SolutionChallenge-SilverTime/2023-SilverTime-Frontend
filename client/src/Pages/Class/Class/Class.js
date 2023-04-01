@@ -23,7 +23,7 @@ export default function Class(props) {
   const [adata, setData] = useState([]);
   const [current, setCurrent] = useState("classIntro");
   useEffect(() => {
-    const url = `http://localhost:8080/lecture/detail/${location.state.key}`;
+    const url = `http://104.154.76.168:8080/lecture/detail/${location.state.key}`;
     axios
       .get(url)
       .then((response) => {

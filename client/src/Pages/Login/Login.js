@@ -40,7 +40,7 @@ export default function Login() {
   const onClickLoginButton = () => {
     axios
       .post(
-        "http://localhost:8080/auth/signin",
+        "http://104.154.76.168:8080/auth/signin",
 
         JSON.stringify({
           identity: identity,

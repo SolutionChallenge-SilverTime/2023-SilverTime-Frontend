@@ -14,7 +14,7 @@ export default function RecommendClass() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const url = `http://localhost:8080/lecture/recommend`;
+    const url = `http://104.154.76.168:8080/lecture/recommend`;
     axios
       .get(url)
       .then((response) => {
@@ -24,7 +24,7 @@ export default function RecommendClass() {
         console.error(error);
       });
   }, []);
-  
+
   const objArray = adata.map((item) => ({
     key: item.lectureId,
     src: item.imageUrl,

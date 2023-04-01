@@ -62,7 +62,7 @@ export default function ClassCategory() {
   ];
 
   useEffect(() => {
-    const url = `http://localhost:8080/user-lecture/all?category=${location.state.value}&sort=like&userId=${userId}`;
+    const url = `http://104.154.76.168:8080/user-lecture/all?category=${location.state.value}&sort=like&userId=${userId}`;
     axios
       .get(url)
       .then((response) => {

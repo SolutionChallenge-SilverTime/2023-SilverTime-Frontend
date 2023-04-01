@@ -27,7 +27,7 @@ export default function MyClass() {
     },
   ];
   useEffect(() => {
-    const url = `http://localhost:8080/tutor-lecture/my-lecture?tutorId=1&state=registered`;
+    const url = `http://104.154.76.168:8080/tutor-lecture/my-lecture?tutorId=1&state=registered`;
     axios
       .get(url)
       .then((response) => {
@@ -81,7 +81,12 @@ export default function MyClass() {
                   width={"170px"}
                   btnName={"수강생 목록 보기"}
                   onClick={() => {
-                    navigate("../studentList");
+                    navigate("../studentList", {
+                      state: {
+                        key: item.key,
+                        className: item.className,
+                      },
+                    });
                   }}
                 />
               </style.ButtonBlock>
