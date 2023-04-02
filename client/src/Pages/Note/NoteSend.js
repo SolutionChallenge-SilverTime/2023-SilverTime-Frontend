@@ -83,7 +83,6 @@ export default function NoteSend() {
           border={"#FF7F00"}
           titleWeight={"500"}
           titleSize={"23px"}
-          placeholder={location.state.seniorName}
           onChange={handleSeniorName}
         />
         <Input
@@ -91,7 +90,6 @@ export default function NoteSend() {
           border={"#FF7F00"}
           titleWeight={"500"}
           titleSize={"23px"}
-          placeholder={location.state.className}
           onChange={handleClassName}
         />
         <Input

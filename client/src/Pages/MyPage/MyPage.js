@@ -11,7 +11,7 @@ export default function MyPage() {
   const userId = sessionStorage.getItem("userId");
   const [adata, setData] = useState([]);
   useEffect(() => {
-    const url = `http://localhost:8080/auth/tutor/mypage/${userId}`;
+    const url = `http://104.154.76.168:8080/auth/tutor/mypage/${userId}`;
     axios
       .get(url)
       .then((response) => {
