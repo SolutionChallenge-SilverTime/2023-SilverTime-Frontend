@@ -30,12 +30,9 @@ export default function Dropdown(props) {
   };
 
   return (
-    <div>
+    <style.Wrap width={props.width}>
       <style.DropdownTitle>{props.title}</style.DropdownTitle>
-      <style.DropdownContainer
-        backgroundColor={props.backgroundColor}
-        width={props.width}
-      >
+      <style.DropdownContainer backgroundColor={props.backgroundColor}>
         <style.DropdownInput onClick={handleInputClick}>
           <div>{getDisplay()}</div>
           <div>
@@ -46,7 +43,7 @@ export default function Dropdown(props) {
         </style.DropdownInput>
       </style.DropdownContainer>
       {showMenu && (
-        <style.DropdownMenu width={props.width}>
+        <style.DropdownMenu>
           {props.options.map((option) => (
             <style.DropdownItem
               onClick={() => onItemClick(option)}
@@ -57,6 +54,6 @@ export default function Dropdown(props) {
           ))}
         </style.DropdownMenu>
       )}
-    </div>
+    </style.Wrap>
   );
 }

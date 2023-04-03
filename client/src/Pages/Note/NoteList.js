@@ -16,7 +16,7 @@ export default function NoteList() {
   const [adata, setData] = useState([]);
 
   useEffect(() => {
-    const url = `http://localhost:8080/significant/${identity}/${nickName}`;
+    const url = `http://104.154.76.168:8080/significant/${identity}/${nickName}`;
     axios
       .get(url)
       .then((response) => {

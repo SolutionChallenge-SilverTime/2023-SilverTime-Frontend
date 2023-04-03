@@ -9,10 +9,12 @@ import RecommendClass from "./Pages/RecommendClass/RecommendClass";
 import NoteSend from "./Pages/Note/NoteSend";
 import NoteList from "./Pages/Note/NoteList";
 import NoteDetail from "./Pages/Note/NoteDetail";
+import Notice from "./Pages/Notice/Notice";
 import MyClass from "./Pages/MyClass/MyClass";
 import MyPage from "./Pages/MyPage/MyPage";
 import Setting from "./Pages/Setting/Setting";
-import Notice from "./Pages/Notice/Notice";
+import StudentList from "./Pages/StudentList/StudentList";
+
 
 function App() {
   return (
@@ -26,12 +28,13 @@ function App() {
           <Route path="/class" element={<Class />} />
           <Route path="/aiClass" element={<RecommendClass />} />
           <Route path="/noteSend" element={<NoteSend />} />
-          <Route path="/noteDetail" element={<NoteDetail />} />
           <Route path="/noteList" element={<NoteList />} />
+          <Route path="/noteDetail" element={<NoteDetail />} />
           <Route path="/notice" element={<Notice />} />
           <Route path="/myClass" element={<MyClass />} />
           <Route path="/myPage" element={<MyPage />} />
           <Route path="/setting" element={<Setting />} />
+          <Route path="/studentList" element={<StudentList />} />
         </Routes>
       </div>
     </BrowserRouter>

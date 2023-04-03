@@ -4,7 +4,7 @@ import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
 import Input from "../../Components/Input/Input";
 import axios from "axios";
-import { useNavigate } from "react-router";
+import { useNavigate} from "react-router";
 
 export default function NoteSend() {
   const navigate = useNavigate();
@@ -39,7 +39,7 @@ export default function NoteSend() {
   const clickNoteButton = () => {
     axios
       .post(
-        "http://localhost:8080/significant/send",
+        "http://104.154.76.168:8080/significant/send",
         JSON.stringify({
           gurdianNickName: guardianName,
           tutorNickName: sessionStorage.getItem("nickName"),
