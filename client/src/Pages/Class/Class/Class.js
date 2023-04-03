@@ -12,13 +12,12 @@ import FloatingButton from "../../../Components/Button/FloatingButton";
 import Modal from "../../../Components/Modal/Modal";
 import { ModalProvider } from "styled-react-modal";
 
-export default function Class(props) {
+export default function Class() {
   const location = useLocation();
   const title = "수업";
 
   const userId = sessionStorage.getItem("userId");
   const identity = sessionStorage.getItem("identity");
-  const id = location.state.key;
 
   const [adata, setData] = useState([]);
   const [current, setCurrent] = useState("classIntro");
