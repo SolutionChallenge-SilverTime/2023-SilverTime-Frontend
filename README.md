@@ -1,7 +1,7 @@
 ![My First Board (1)](https://user-images.githubusercontent.com/66052043/229683886-3e7c9262-5a4a-4f51-85a8-ebfa4b33ed4a.jpg)
 
 
-## Instroduction
+## Introduction
 
 SilverTime is a service provided by a welfare center that offers various contents for elderly people. Our service provides classes in various fields such as art, cooking, and sports, allowing elderly people to enjoy a variety of hobbies.
 
