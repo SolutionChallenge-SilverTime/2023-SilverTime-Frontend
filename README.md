@@ -1,6 +1,5 @@
-# SilverTime
+![My First Board (1)](https://user-images.githubusercontent.com/66052043/229683886-3e7c9262-5a4a-4f51-85a8-ebfa4b33ed4a.jpg)
 
-[2023-02-SolutionChallenge] Silver Time Repository
 
 ## Instroduction
 
@@ -29,9 +28,9 @@ We strive to provide elderly people with a more enjoyable retirement life by hel
 |![airecommend](https://user-images.githubusercontent.com/66052043/229365290-346bdc2a-e8cc-45ea-a6e1-590a39f92d01.png)|![detail (1)](https://user-images.githubusercontent.com/66052043/229391908-6ad8fb91-ff53-451e-9964-3c8864bbdcc2.png)|![curr](https://user-images.githubusercontent.com/66052043/229365339-e7bcc021-f07d-468b-a77b-5b46db870aca.png)|
 
 
-| About Tutor | Review | alert |
+| About Tutor | Review | Category  |
 |:----------: | :------------: | :------------: |
-![lecturetutorinfo](https://user-images.githubusercontent.com/66052043/229365365-49c2e5c8-8ea2-4d75-ba85-8de5bcc1a703.png) | ![review](https://user-images.githubusercontent.com/66052043/229365425-f809a7fa-93d9-441c-befb-eb7acb90e255.png)|![localhost_3000_myPage (2) (1)](https://user-images.githubusercontent.com/66052043/229366605-6baeed04-56e7-4522-a98f-16f3ef9bd89d.png)|
+![lecturetutorinfo](https://user-images.githubusercontent.com/66052043/229365365-49c2e5c8-8ea2-4d75-ba85-8de5bcc1a703.png) | ![review](https://user-images.githubusercontent.com/66052043/229365425-f809a7fa-93d9-441c-befb-eb7acb90e255.png)|![localhost_3000_classCategory](https://user-images.githubusercontent.com/66052043/229553171-eada11ac-1052-4cce-b6f3-ede0625bf165.png)|
 
 | MyPage (Tutor) | Tutor's Lectures | Student List |
 |:----------: | :------------: | :------------: |
@@ -42,7 +41,9 @@ We strive to provide elderly people with a more enjoyable retirement life by hel
 |:----------: | :------------: | :------------: |
 |![noticewrite](https://user-images.githubusercontent.com/66052043/229365902-f167c99d-64a5-45a2-8bbc-0de457bbb6a3.png)|![significant](https://user-images.githubusercontent.com/66052043/229366005-3421a38f-714e-449a-9cda-05700403e6e4.png)|![noticecheck](https://user-images.githubusercontent.com/66052043/229365961-593aa181-6cfa-4f14-ba98-f5336984e97b.png)|
 
-
+| Setting | alert | 
+|:----------: | :------------: | 
+|![](https://user-images.githubusercontent.com/66052043/229552651-0a40a1a7-3711-43c5-ae13-91b3abed2123.png)|![localhost_3000_myPage (2) (1)](https://user-images.githubusercontent.com/66052043/229366605-6baeed04-56e7-4522-a98f-16f3ef9bd89d.png)|
 
 
 
@@ -56,10 +57,11 @@ cd SilverTime/client
 npm install
 npm start
 ```
+Please change the width to 480 cellphone size in developer mode of Chrome.
 
 ## Contributors
 |Backend | Backend | Front |AI|
 |:----------: | :------------: | :------------: |:------------: |
-|![IMG_5243 (1)](https://user-images.githubusercontent.com/66052043/229368954-284ea82a-04a8-4968-9014-359ebca6da1e.jpg)|준원님사진|![KakaoTalk_Image_2023-04-03-02-07-04](https://user-images.githubusercontent.com/66052043/229369087-1aa4e209-41b1-43c2-99c7-c427a18598e6.jpeg)|![KakaoTalk_Image_2023-04-03-02-08-48](https://user-images.githubusercontent.com/66052043/229369091-c68a36b6-ac76-48b8-b0c7-1e697c41f684.png)|
+|![IMG_5243 (1)](https://user-images.githubusercontent.com/66052043/229368954-284ea82a-04a8-4968-9014-359ebca6da1e.jpg)|<img src="https://user-images.githubusercontent.com/43106344/229676718-14effafa-26e3-4c34-873a-c09fbff8c5fd.jpg" width="200" height="200"/>|![KakaoTalk_Image_2023-04-03-02-07-04](https://user-images.githubusercontent.com/66052043/229369087-1aa4e209-41b1-43c2-99c7-c427a18598e6.jpeg)|![KakaoTalk_Image_2023-04-03-02-08-48](https://user-images.githubusercontent.com/66052043/229369091-c68a36b6-ac76-48b8-b0c7-1e697c41f684.png)|
 |[황솔희](https://github.com/solhee-hwang)|[서준원](https://github.com/wnsdnjs70)|[김민선](https://github.com/CLM-BONNY)|[김영석](https://github.com/youngseok0)|
 
